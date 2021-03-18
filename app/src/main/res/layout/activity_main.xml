@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="seeMore"
     tools:context=".MainActivity">
 
     <TextView
@@ -36,11 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/cutn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cutn"
         app:srcCompat="@drawable/ic_baseline_card_giftcard_24"
-        android:layout_marginRight="16dp"
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
@@ -70,11 +71,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchForProduct"
         app:srcCompat="@drawable/ic_baseline_mic_24"
-        android:layout_marginRight="16dp"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
@@ -89,6 +90,19 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/seeMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:onClick="seeMore"
+        android:text="See more"
+        android:textColor="@android:color/background_dark"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/category" />
 
     <TextView
         android:id="@+id/popularItems"
