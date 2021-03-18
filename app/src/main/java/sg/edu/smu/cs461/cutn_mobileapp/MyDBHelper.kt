@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1) {
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("CREATE TABLE PRODUCTS(PRODUCTID INTEGER PRIMARY KEY AUTOINCREMENT, CATEGORY TEXT, PRODUCTNAME TEXT, QUANTITY TEXT, DESCRIPTION TEXT, PRICE REAL, COUNTRY TEXT)")
+        db?.execSQL("CREATE TABLE PRODUCTS(PRODUCTID INTEGER PRIMARY KEY AUTOINCREMENT, CATEGORY VARCHAR(256), PRODUCTNAME VARCHAR(256), QUANTITY VARCHAR(256), DESCRIPTION VARCHAR(256), PRICE REAL, COUNTRY VARCHAR(256))")
 
         db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('fruits','fuji Apple','5','fresh imported apples from fuji',6.5,'Aomori, Japan')")
         db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('fruits','USA organic Apple','5','crunchy and tasty, high in fibre',5.5,'USA')")
@@ -38,10 +38,81 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('packages','Pura Sour-Cream','400g','Bad for lactose kids',5.35,'NZ')")
         db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('packages','Low-fat Meiji Milk','1L','Good for calcium and bones',5.75,'Japan')")
         db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('packages','Goat Milk','1L','Good for calcium and bones, non lactose',6.75,'Australia')")
-        db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('packages','HL-Milk','1L','Premium milk for HL',4.95,'NZ')")
+        db?.execSQL("INSERT INTO PRODUCTS(CATEGORY,PRODUCTNAME,QUANTITY,DESCRIPTION,PRICE,COUNTRY) VALUES('packages','HL-Milk','1L','Premium milk for young boys',4.95,'NZ')")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
+    }
+
+    //get all data.
+    fun readData(): MutableList<Product>{
+        var list : MutableList<Product> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from ProductsDB"
+        val result = db.rawQuery(query,null)
+        if(result.moveToFirst()){
+            do{
+                var curr = Product()
+                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("productname"))
+                curr.quantity = result.getString(result.getColumnIndex("quantity"))
+                curr.description = result.getString(result.getColumnIndex("description"))
+                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("country"))
+                list.add(curr)
+            }while(result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    fun readByCategory(cate:String): MutableList<Product>{
+        var list : MutableList<Product> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from ProductsDB where category = $cate"
+        val result = db.rawQuery(query,null)
+        if(result.moveToFirst()){
+            do{
+                var curr = Product()
+                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("productname"))
+                curr.quantity = result.getString(result.getColumnIndex("quantity"))
+                curr.description = result.getString(result.getColumnIndex("description"))
+                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("country"))
+                list.add(curr)
+            }while(result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    fun readByMachineLearning(keyword:String): MutableList<Product>{
+        var list : MutableList<Product> = ArrayList()
+        val db = this.readableDatabase
+        val keyValue = "%$keyword%"
+        val query = "Select * from ProductsDB where productname LIKE $keyValue"
+        val result = db.rawQuery(query,null)
+        if(result.moveToFirst()){
+            do{
+                var curr = Product()
+                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("productname"))
+                curr.quantity = result.getString(result.getColumnIndex("quantity"))
+                curr.description = result.getString(result.getColumnIndex("description"))
+                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("country"))
+                list.add(curr)
+            }while(result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
     }
 }
