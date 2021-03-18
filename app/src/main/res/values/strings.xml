@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CUTN-MobileApp</string>
+    <string-array name="defns">
+        <item>SMU</item>
+        <item>SCIS</item>
+        <item>SESS</item>
+    </string-array>
 </resources>
