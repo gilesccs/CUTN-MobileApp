@@ -30,16 +30,17 @@
         app:layout_constraintTop_toTopOf="@+id/rewards"
         app:srcCompat="@drawable/ic_cart_black" />
 
-    <ImageView
+    <Button
         android:id="@+id/rewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/cutn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cutn"
-        app:srcCompat="@drawable/ic_account_settings"
-        android:layout_marginRight="16dp" />
+        android:onClick="viewRewards"
+        android:background="@drawable/ic_account_settings"
+        android:layout_marginRight="8dp" />
 
     <EditText
         android:id="@+id/searchForProduct"
