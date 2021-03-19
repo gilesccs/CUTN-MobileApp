@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,9 +34,10 @@
             app:layout_constraintEnd_toStartOf="@+id/rewards"
             app:layout_constraintTop_toTopOf="@+id/rewards"
             app:srcCompat="@drawable/ic_cart_black"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            android:background="@color/white"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rewards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cutn"
             app:srcCompat="@drawable/ic_baseline_card_giftcard_24"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            android:background="@color/white"/>
 
         <EditText
             android:id="@+id/searchForProduct"
@@ -58,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="4dp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,9 +70,10 @@
             app:layout_constraintEnd_toStartOf="@+id/microphone"
             app:layout_constraintTop_toTopOf="@+id/microphone"
             app:srcCompat="@drawable/ic_baseline_add_a_photo_24"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            android:background="@color/white"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/microphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +83,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/searchForProduct"
             app:srcCompat="@drawable/ic_baseline_mic_24"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/category"
@@ -95,17 +99,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/seeMoreCategory"
+        <ImageButton
+            android:id="@+id/seeMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="See more"
-            android:textColor="@android:color/background_dark"
-            android:textSize="10sp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/popularItems"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/popularItems" />
+            app:layout_constraintTop_toTopOf="@+id/popularItems"
+            app:srcCompat="@drawable/ic_baseline_more_24"
+            tools:ignore="VectorDrawableCompat"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/popularItems"
