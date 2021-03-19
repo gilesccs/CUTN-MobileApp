@@ -30,12 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:src="@drawable/cart"
             app:layout_constraintBottom_toBottomOf="@+id/rewards"
             app:layout_constraintEnd_toStartOf="@+id/rewards"
-            app:layout_constraintTop_toTopOf="@+id/rewards"
-            app:srcCompat="@drawable/ic_cart_black"
-            tools:ignore="VectorDrawableCompat"
-            android:background="@color/white"/>
+            app:layout_constraintTop_toTopOf="@+id/rewards"/>
 
         <ImageButton
             android:id="@+id/rewards"
@@ -43,12 +41,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:src="@drawable/reward"
             app:layout_constraintBottom_toBottomOf="@+id/cutn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cutn"
-            app:srcCompat="@drawable/ic_baseline_card_giftcard_24"
-            tools:ignore="VectorDrawableCompat"
-            android:background="@color/white"/>
+            app:layout_constraintTop_toTopOf="@+id/cutn"/>
 
         <EditText
             android:id="@+id/searchForProduct"
@@ -66,12 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:src="@drawable/photo"
             app:layout_constraintBottom_toBottomOf="@+id/microphone"
             app:layout_constraintEnd_toStartOf="@+id/microphone"
-            app:layout_constraintTop_toTopOf="@+id/microphone"
-            app:srcCompat="@drawable/ic_baseline_add_a_photo_24"
-            tools:ignore="VectorDrawableCompat"
-            android:background="@color/white"/>
+            app:layout_constraintTop_toTopOf="@+id/microphone"/>
 
         <ImageButton
             android:id="@+id/microphone"
@@ -79,12 +73,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:src="@drawable/microphone"
             app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/searchForProduct"
-            app:srcCompat="@drawable/ic_baseline_mic_24"
-            tools:ignore="VectorDrawableCompat"
-            android:background="@color/white"/>
+            app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
 
         <TextView
             android:id="@+id/category"
@@ -101,16 +93,15 @@
 
         <ImageButton
             android:id="@+id/seeMore"
+            android:tag="seeMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:src="@drawable/more"
             app:layout_constraintBottom_toBottomOf="@+id/popularItems"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/popularItems"
-            app:srcCompat="@drawable/ic_baseline_more_24"
-            tools:ignore="VectorDrawableCompat"
-            android:background="@color/white"/>
+            app:layout_constraintTop_toTopOf="@+id/popularItems"/>
 
         <TextView
             android:id="@+id/popularItems"
@@ -125,6 +116,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
