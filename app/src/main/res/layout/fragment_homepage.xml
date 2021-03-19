@@ -117,11 +117,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/popular_items_layout"
             android:id="@+id/recyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintStart_toStartOf="@+id/popularItems"
+            app:layout_constraintTop_toBottomOf="@+id/popularItems" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
