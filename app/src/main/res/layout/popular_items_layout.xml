@@ -19,57 +19,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/cutn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp"
-        android:text="CUTN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/cutn"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/cutn2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginLeft="32dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="CUTN"-->
+<!--        android:textColor="@android:color/background_dark"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/cutn"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/cutn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp"
-        android:text="CUTN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/cutn2"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/cutn3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginLeft="32dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="CUTN"-->
+<!--        android:textColor="@android:color/background_dark"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/cutn2"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/cutn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp"
-        android:text="CUTN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/cutn3"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/cutn4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginLeft="32dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="CUTN"-->
+<!--        android:textColor="@android:color/background_dark"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/cutn3"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/cutn5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp"
-        android:text="CUTN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/cutn4"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/cutn5"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginLeft="32dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="CUTN"-->
+<!--        android:textColor="@android:color/background_dark"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/cutn4"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
