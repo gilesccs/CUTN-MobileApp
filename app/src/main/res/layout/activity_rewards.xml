@@ -13,6 +13,7 @@
 
 
     <Button
+        android:id="@+id/goBack"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_baseline_arrow_back_24"
@@ -133,13 +134,14 @@
         android:gravity="center"
         android:textColor="#CC4545"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="50sp"
         android:visibility="invisible"/>
 
     <Button
         android:id="@+id/copyBtn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/discountHeader"
         android:layout_toRightOf="@id/voucherCode"
         android:background="@drawable/ic_baseline_content_copy_24"
