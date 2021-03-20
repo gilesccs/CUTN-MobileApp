@@ -117,15 +117,19 @@ class Rewards : AppCompatActivity(), SensorEventListener {
 
 
     }
+    fun sendNotification(){
+
+    }
 
     fun congratulations(){
         val gz = findViewById<TextView>(R.id.congratsMsg)
         if(gz.visibility == View.INVISIBLE){
             showMsg()
+            sendNotification()
         }
         val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
         viewKonfetti.build()
-            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+            .addColors(Color.BLUE, Color.MAGENTA)
             .setDirection(0.0, 359.0)
             .setSpeed(1f, 5f)
             .setFadeOutEnabled(true)
