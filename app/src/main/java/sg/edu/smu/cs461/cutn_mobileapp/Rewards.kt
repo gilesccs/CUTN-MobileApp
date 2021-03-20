@@ -1,6 +1,9 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -13,6 +16,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +48,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         }
         loadData()
         resetRewards()
+        copyTextToClipboard()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         replaceVoucher()
     }
@@ -87,7 +92,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         if(running){
             totalSteps = event!!.values[0]
             val currentSteps = totalSteps.toInt() - prevTotal.toInt()
-            if(currentSteps > 20){
+            if(currentSteps >= 20){
                 congratulations()
             }
             val curr = findViewById<TextView>(R.id.currentStepsView)
@@ -99,6 +104,22 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             }
         }
     }
+
+    fun copyTextToClipboard() {
+        val btn = findViewById<Button>(R.id.copyBtn)
+        val curr = findViewById<TextView>(R.id.voucherCode)
+
+        btn.setOnClickListener{
+            val textToCopy = curr.text
+            val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("text", textToCopy)
+            clipboardManager.setPrimaryClip(clipData)
+            Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_LONG).show()
+        }
+
+
+    }
+
     fun congratulations(){
         val gz = findViewById<TextView>(R.id.congratsMsg)
         if(gz.visibility == View.INVISIBLE){
@@ -106,24 +127,25 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         }
         val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
         viewKonfetti.build()
-            .addColors(Color.MAGENTA,Color.BLUE,Color.RED,Color.YELLOW)
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
             .setDirection(0.0, 359.0)
-            .setSpeed(1f,2f)
+            .setSpeed(1f, 5f)
             .setFadeOutEnabled(true)
-            .setTimeToLive(5000L)
+            .setTimeToLive(1000L)
             .addShapes(Shape.Square, Shape.Circle)
-            .addSizes(Size(12))
+            .addSizes(Size(12, 5F))
             .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
             .streamFor(particlesPerSecond = 50, emittingTime = StreamEmitter.INDEFINITE)
     }
 
     fun resetRewards(){
+        val btn = findViewById<Button>(R.id.resetBtn)
         val curr = findViewById<TextView>(R.id.currentStepsView)
-        curr.setOnClickListener{
+        btn.setOnClickListener{
             Toast.makeText(this,"Hold this to reset your rewards! Make sure to copy the discount code",Toast.LENGTH_LONG).show()
         }
 
-        curr.setOnLongClickListener{
+        btn.setOnLongClickListener{
             val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
             viewKonfetti.reset()
             showMsg()
@@ -135,6 +157,9 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             true
         }
     }
+
+
+
 
     private fun saveData(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
@@ -170,6 +195,20 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             vouchercode.visibility = View.INVISIBLE
         }else{
             vouchercode.visibility = View.VISIBLE
+        }
+
+        val reset = findViewById<TextView>(R.id.resetBtn)
+        if(reset.visibility == View.VISIBLE){
+            reset.visibility = View.INVISIBLE
+        }else{
+            reset.visibility = View.VISIBLE
+        }
+
+        val copyBtn = findViewById<Button>(R.id.copyBtn)
+        if(copyBtn.visibility == View.VISIBLE){
+            copyBtn.visibility = View.INVISIBLE
+        }else{
+            copyBtn.visibility = View.VISIBLE
         }
     }
 
