@@ -1,11 +1,14 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.RecyclerView
+import io.paperdb.Paper
 
 
 class AllProducts : AppCompatActivity() {
@@ -18,21 +21,45 @@ class AllProducts : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        Paper.init(this)
+        setContentView(R.layout.activity_all_products)
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
-        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
+        val cart_size = findViewById<TextView>(R.id.cart_size)
+        cart_size.text = ShoppingCart.getShoppingCartSize().toString()
 
-        swipeRefreshLayout.isRefreshing = true
+        try {
+            swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setColorSchemeColors(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.colorPrimary
+                    )
+                )
+                swipeRefreshLayout.isRefreshing = true
 
-        // assign a layout manager to the recycler view
-        products_recyclerview.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
+        } catch (e: Exception) {
+            Log.i("ERROR", e.toString())
+        }
 
-        getProducts()
+        try {
+            products_recyclerview = findViewById(R.id.products_recyclerview)
+            if (products_recyclerview != null) {
+                // assign a layout manager to the recycler view
+                products_recyclerview.layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+                getProducts()
+            }
+
+        } catch (e: Exception) {
+            Log.i("ERROR",e.toString())
+        }
+
 
     }
 
@@ -41,9 +68,15 @@ class AllProducts : AppCompatActivity() {
 
         swipeRefreshLayout.isRefreshing = false
 //        products = response.body()!!
-        val myDBHelper = MyDBHelper(this)
-        products = myDBHelper.readByCategory("fruits")
+//        val myDBHelper = MyDBHelper(this)
+//        products = myDBHelper.readByCategory("fruits")
+//
+        products = listOf(
+            Product("name", "1", "description", 4.0f, "Singapore"),
+            Product("name", "1", "description", 4.0f, "Singapore")
+        )
 
+        Log.i("products", products[0].productname.toString())
         productAdapter = ProductAdapter(this, products)
 
         products_recyclerview = findViewById(R.id.products_recyclerview)

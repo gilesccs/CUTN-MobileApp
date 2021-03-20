@@ -77,5 +77,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All Product"
+        app:layout_constraintBottom_toTopOf="@+id/popularItems"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category"
+        android:onClick="goToAllProducts"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,17 +48,35 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/addToCart"
-            android:paddingHorizontal="16dp"
-            android:tint="@android:color/white"
-            android:paddingVertical="4dp"
-            android:src="@drawable/ic_add_shopping"
+        <LinearLayout
             android:layout_gravity="end"
-            android:background="@color/colorAccent"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:targetApi="o"/>
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/removeItem"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:tint="@android:color/white"
+                android:paddingVertical="4dp"
+                android:src="@drawable/ic_remove_shopping_cart"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                card_view:targetApi="o"/>
+
+            <ImageButton
+                android:id="@+id/addToCart"
+                android:paddingHorizontal="16dp"
+                android:tint="@android:color/white"
+                android:paddingVertical="4dp"
+                android:src="@drawable/ic_add_shopping"
+                android:background="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:targetApi="o"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
