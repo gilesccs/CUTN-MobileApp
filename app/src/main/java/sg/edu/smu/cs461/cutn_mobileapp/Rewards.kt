@@ -2,10 +2,7 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.hardware.Sensor
@@ -46,6 +43,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 requestPermissions(permission, 1313)
             }
         }
+        goBackHomePage()
         loadData()
         resetRewards()
         copyTextToClipboard()
@@ -159,7 +157,13 @@ class Rewards : AppCompatActivity(), SensorEventListener {
     }
 
 
-
+    fun goBackHomePage(){
+        val btn = findViewById<Button>(R.id.goBack)
+        btn.setOnClickListener{
+            val it = Intent(this, MainActivity::class.java)
+            startActivity(it)
+        }
+    }
 
     private fun saveData(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
