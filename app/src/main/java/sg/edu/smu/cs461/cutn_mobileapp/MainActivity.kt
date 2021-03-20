@@ -2,7 +2,6 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = ProductAdapter(productList)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
     }
 
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0 until size){
 //            val item = Product("Item: ${list.get(i).productname}", list.get(i).price)
-            val item = Product("Item: $i", 9.99f)
+            val item = Product("Item: $i", 9.99f,"Singapore","apples from Singapore")
             list += item
         }
 

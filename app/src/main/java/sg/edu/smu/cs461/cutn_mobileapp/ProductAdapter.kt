@@ -28,7 +28,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
 
     class ProductViewHolder(productView: View) : RecyclerView.ViewHolder(productView) {
         val imageView: ImageView = productView.findViewById(R.id.imageView)
-        val textView1: TextView = productView.findViewById(R.id.textView1)
-        val textView2: TextView = productView.findViewById(R.id.textView2)
+        val textView1: TextView = productView.findViewById(R.id.productName)
+        val textView2: TextView = productView.findViewById(R.id.price)
     }
 }

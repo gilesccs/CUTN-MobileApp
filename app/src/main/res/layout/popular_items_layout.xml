@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="120dp"
+    android:layout_height="180dp"
+    android:layout_marginRight="12dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,21 +17,37 @@
             android:src="@drawable/ic_baseline_fastfood_24"/>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageView"
-            android:text="Line 1"
+            android:text="Product Name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Line 2"
-            android:layout_below="@id/textView1"
+            android:text="Price"
+            android:layout_below="@id/productName"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country"
+            android:layout_below="@id/price"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_below="@id/country"
             android:textColor="@color/black"/>
 
     </RelativeLayout>
