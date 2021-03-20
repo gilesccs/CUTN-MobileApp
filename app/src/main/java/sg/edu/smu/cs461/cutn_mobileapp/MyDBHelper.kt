@@ -49,7 +49,7 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
     fun readData(): MutableList<Product>{
         var list : MutableList<Product> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from ProductsDB"
+        val query = "Select * from Products"
         val result = db.rawQuery(query,null)
         if(result.moveToFirst()){
             do{
@@ -72,7 +72,7 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
     fun readByCategory(cate:String): MutableList<Product>{
         var list : MutableList<Product> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from ProductsDB where category = $cate"
+        val query = "Select * from Products where category = $cate"
         val result = db.rawQuery(query,null)
         if(result.moveToFirst()){
             do{
@@ -96,7 +96,7 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         var list : MutableList<Product> = ArrayList()
         val db = this.readableDatabase
         val keyValue = "%$keyword%"
-        val query = "Select * from ProductsDB where productname LIKE $keyValue"
+        val query = "Select * from Products where productname LIKE $keyValue"
         val result = db.rawQuery(query,null)
         if(result.moveToFirst()){
             do{
