@@ -8,8 +8,10 @@ class Product{
     var description : String = ""
     var price : Float = 0.0f
     var country : String = ""
+    var category: String = ""
 
-    constructor(productname:String,quantity:String,description:String,price:Float,country:String){
+    constructor(category:String,productname:String,quantity:String,description:String,price:Float,country:String){
+        this.category = category
         this.productname = productname
         this.quantity = quantity
         this.description = description
