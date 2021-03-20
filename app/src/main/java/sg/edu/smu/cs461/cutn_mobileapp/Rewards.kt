@@ -2,6 +2,9 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -17,6 +20,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import nl.dionsegijn.konfetti.KonfettiView
 import nl.dionsegijn.konfetti.emitters.StreamEmitter
@@ -33,6 +38,11 @@ class Rewards : AppCompatActivity(), SensorEventListener {
     private var prevTotal = 0f
     private var currentVoucher = "ASZ213SA"
     private var voucherPool : List<String> = listOf("SZVA331A", "ZS1SA3A", "ASD31ASP","DEF113A3")
+    private val CHANNEL_ID = "channelID"
+    private val CHANNEL_NAME = "channelName"
+    private lateinit var NOT_MANAGER: NotificationManagerCompat
+    private lateinit var NOTI: Notification
+    val NOTIFICATION_ID = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +53,16 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 requestPermissions(permission, 1313)
             }
         }
+        createNotificationChannel()
+        NOTI = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentText("You have successfully earn a reward. Claim them now!")
+                .setContentTitle("Congratulations!")
+                .setSmallIcon(R.drawable.ic_baseline_beenhere_24)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .build()
+
+        NOT_MANAGER = NotificationManagerCompat.from(this)
+
         goBackHomePage()
         loadData()
         resetRewards()
@@ -50,6 +70,20 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         replaceVoucher()
     }
+
+    fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channel = NotificationChannel(CHANNEL_ID,CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT).apply{
+                lightColor = Color.BLUE
+                enableLights(true)
+            }
+
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
+    }
+
     fun replaceVoucher(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
         val savedCode = sharedPreferences.getString("discountCode","")
@@ -117,15 +151,13 @@ class Rewards : AppCompatActivity(), SensorEventListener {
 
 
     }
-    fun sendNotification(){
 
-    }
 
     fun congratulations(){
         val gz = findViewById<TextView>(R.id.congratsMsg)
         if(gz.visibility == View.INVISIBLE){
             showMsg()
-            sendNotification()
+            NOT_MANAGER.notify(NOTIFICATION_ID, NOTI)
         }
         val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
         viewKonfetti.build()
@@ -137,7 +169,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             .addShapes(Shape.Square, Shape.Circle)
             .addSizes(Size(12, 5F))
             .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
-            .streamFor(particlesPerSecond = 50, emittingTime = StreamEmitter.INDEFINITE)
+            .streamFor(particlesPerSecond = 50, emittingTime = 5000L)
     }
 
     fun resetRewards(){
