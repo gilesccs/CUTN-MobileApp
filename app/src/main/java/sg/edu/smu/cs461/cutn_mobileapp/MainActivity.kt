@@ -3,6 +3,7 @@ package sg.edu.smu.cs461.cutn_mobileapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,15 +32,16 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun generateDummyList(size: Int): List<Product>{
-//        val list = ArrayList<Product>()
-//        list.add(Product("fuji Apple",5f,"fuji","fresh imported apples from fuji"))
-//        list.add(Product("fuji Orange",3.99f,"fuji","fresh imported orange from fuji"))
-//        list.add(Product("fuji melon",50f,"fuji","fresh imported melon from fuji"))
-//        list.add(Product("fuji strawberry",15f,"fuji","fresh imported strawberry from fuji"))
-//        list.add(Product("Tokyo banana",7.99f,"Tokyo","fresh imported banana from Tokyo"))
+        val list = ArrayList<Product>()
+        list.add(Product("fuji Apple",5f,"fuji","fresh imported apples from fuji"))
+        list.add(Product("fuji Orange",3.99f,"fuji","fresh imported orange from fuji"))
+        list.add(Product("fuji melon",50f,"fuji","fresh imported melon from fuji"))
+        list.add(Product("fuji strawberry",15f,"fuji","fresh imported strawberry from fuji"))
+        list.add(Product("Tokyo banana",7.99f,"Tokyo","fresh imported banana from Tokyo"))
 
-        val myDBHelper = MyDBHelper(this)
-        val list = myDBHelper.readData()
+//        val myDBHelper = MyDBHelper(this)
+//        val list = myDBHelper.readData()
+//        Log.i("test", list.get(3).productname)
 
         for (i in 0 until size){
 //            val item = Product("Item: ${list.get(i).productname}", list.get(i).price)

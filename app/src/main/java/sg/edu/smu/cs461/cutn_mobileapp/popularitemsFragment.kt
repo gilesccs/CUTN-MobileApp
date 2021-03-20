@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 
-class fragment_popularitems : Fragment(), View.OnClickListener {
+class popularitemsFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +23,7 @@ class fragment_popularitems : Fragment(), View.OnClickListener {
         viewRewards(this)
     }
 
-    private fun viewRewards(view: fragment_popularitems) {
+    private fun viewRewards(view: popularitemsFragment) {
         val rewardsBtn = activity?.findViewById<ImageButton>(R.id.rewards)
         rewardsBtn?.setOnClickListener{
             val it = Intent(activity, Rewards::class.java)
