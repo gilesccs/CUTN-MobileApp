@@ -2,9 +2,7 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -54,11 +52,19 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             }
         }
         createNotificationChannel()
+
+        val notiIntent = Intent(this, Rewards::class.java)
+        val pendingNotiIntent = TaskStackBuilder.create(this).run{
+            addNextIntentWithParentStack(notiIntent)
+            getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
         NOTI = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentText("You have successfully earn a reward. Claim them now!")
                 .setContentTitle("Congratulations!")
                 .setSmallIcon(R.drawable.ic_baseline_beenhere_24)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingNotiIntent)
                 .build()
 
         NOT_MANAGER = NotificationManagerCompat.from(this)
@@ -158,18 +164,29 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         if(gz.visibility == View.INVISIBLE){
             showMsg()
             NOT_MANAGER.notify(NOTIFICATION_ID, NOTI)
+            val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
+            viewKonfetti.build()
+                    .addColors(Color.BLUE, Color.MAGENTA)
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(1000L)
+                    .addShapes(Shape.Square, Shape.Circle)
+                    .addSizes(Size(12, 5F))
+                    .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
+                    .streamFor(particlesPerSecond = 200, emittingTime = 5000L)
         }
-        val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
-        viewKonfetti.build()
-            .addColors(Color.BLUE, Color.MAGENTA)
-            .setDirection(0.0, 359.0)
-            .setSpeed(1f, 5f)
-            .setFadeOutEnabled(true)
-            .setTimeToLive(1000L)
-            .addShapes(Shape.Square, Shape.Circle)
-            .addSizes(Size(12, 5F))
-            .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
-            .streamFor(particlesPerSecond = 50, emittingTime = 5000L)
+//        val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
+//        viewKonfetti.build()
+//            .addColors(Color.BLUE, Color.MAGENTA)
+//            .setDirection(0.0, 359.0)
+//            .setSpeed(1f, 5f)
+//            .setFadeOutEnabled(true)
+//            .setTimeToLive(1000L)
+//            .addShapes(Shape.Square, Shape.Circle)
+//            .addSizes(Size(12, 5F))
+//            .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
+//            .streamFor(particlesPerSecond = 50, emittingTime = 5000L)
     }
 
     fun resetRewards(){
