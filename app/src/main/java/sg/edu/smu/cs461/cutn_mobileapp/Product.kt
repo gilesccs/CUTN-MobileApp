@@ -17,6 +17,11 @@ class Product{
         this.country = country
     }
 
+    constructor(productname: String,description: String){
+        this.productname = productname
+        this.description = description
+    }
+
     constructor(){
 
     }

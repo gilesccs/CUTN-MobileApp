@@ -36,4 +36,15 @@ class fragment_homepage : Fragment(), View.OnClickListener {
 //        myIntent.putExtra("pokemon_name", tag)
 //        startActivity(myIntent)
     }
+
+    private fun generateDummyList(size: Int): List<Product>{
+        val list = ArrayList<Product>()
+
+        for (i in 0 until size){
+            val item = Product("Item $i", "Line 2")
+            list += item
+        }
+
+        return list
+    }
 }
