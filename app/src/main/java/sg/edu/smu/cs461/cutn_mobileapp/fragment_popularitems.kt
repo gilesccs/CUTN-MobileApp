@@ -1,5 +1,6 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ class fragment_popularitems : Fragment(), View.OnClickListener {
         viewRewards(this)
     }
 
-    private fun viewRewards(view: fragment_homepage) {
+    private fun viewRewards(view: fragment_popularitems) {
         val rewardsBtn = activity?.findViewById<ImageButton>(R.id.rewards)
         rewardsBtn?.setOnClickListener{
             val it = Intent(activity, Rewards::class.java)
