@@ -13,7 +13,7 @@ import io.paperdb.Paper
 
 class AllProducts : AppCompatActivity() {
 
-    private lateinit var productAdapter: ProductAdapter
+    private lateinit var productAdapter: AllProductAdapter
     private var products = listOf<Product>()
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var products_recyclerview: RecyclerView
@@ -32,16 +32,14 @@ class AllProducts : AppCompatActivity() {
 
         try {
             swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout.setColorSchemeColors(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.colorPrimary
-                    )
+            swipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(
+                    this,
+                    R.color.colorPrimary
                 )
-                swipeRefreshLayout.isRefreshing = true
+            )
+            swipeRefreshLayout.isRefreshing = true
 
-            }
         } catch (e: Exception) {
             Log.i("ERROR", e.toString())
         }
@@ -77,7 +75,7 @@ class AllProducts : AppCompatActivity() {
         )
 
         Log.i("products", products[0].productname.toString())
-        productAdapter = ProductAdapter(this, products)
+        productAdapter = AllProductAdapter(this, products)
 
         products_recyclerview = findViewById(R.id.products_recyclerview)
         products_recyclerview.adapter = productAdapter
