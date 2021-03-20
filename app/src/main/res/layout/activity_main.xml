@@ -66,13 +66,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
-<!--    <fragment-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/categoryFragment"-->
-<!--        android:name="sg.edu.smu.cs461.cutn_mobileapp.categoryFragment"-->
-<!--        tools:layout="@layout/fragment_category"/>-->
-        <Button
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/categoryFragment"
+        android:name="sg.edu.smu.cs461.cutn_mobileapp.categoryFragment"
+        tools:layout="@layout/fragment_category"/>
+
+    <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category"
         android:onClick="goToAllProducts"/>
+        
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
