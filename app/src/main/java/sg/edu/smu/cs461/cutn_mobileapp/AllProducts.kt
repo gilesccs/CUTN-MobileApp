@@ -66,13 +66,13 @@ class AllProducts : AppCompatActivity() {
 
         swipeRefreshLayout.isRefreshing = false
 //        products = response.body()!!
-//        val myDBHelper = MyDBHelper(this)
-//        products = myDBHelper.readByCategory("fruits")
+        val myDBHelper = MyDBHelper(this)
+        products = myDBHelper.readByCategory("fruits")
 //
-        products = listOf(
-            Product("name", "1", "description", 4.0f, "Singapore"),
-            Product("name", "1", "description", 4.0f, "Singapore")
-        )
+//        products = listOf(
+//            Product("name", "1", "description", 4.0f, "Singapore"),
+//            Product("name", "1", "description", 4.0f, "Singapore")
+//        )
 
         Log.i("products", products[0].productname.toString())
         productAdapter = AllProductAdapter(this, products)
