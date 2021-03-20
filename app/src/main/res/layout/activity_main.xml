@@ -6,11 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/cutn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="4dp"
+        android:text="CUTN"
+        android:textColor="@android:color/background_dark"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/cart"
+        app:layout_constraintBottom_toBottomOf="@+id/rewards"
+        app:layout_constraintEnd_toStartOf="@+id/rewards"
+        app:layout_constraintTop_toTopOf="@+id/rewards"/>
+
+    <ImageButton
+        android:id="@+id/rewards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/reward"
+        app:layout_constraintBottom_toBottomOf="@+id/cutn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cutn"/>
+
+    <EditText
+        android:id="@+id/searchForProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:hint="Search For Product"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="4dp" />
+
+    <ImageButton
+        android:id="@+id/photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/photo"
+        app:layout_constraintBottom_toBottomOf="@+id/microphone"
+        app:layout_constraintEnd_toStartOf="@+id/microphone"
+        app:layout_constraintTop_toTopOf="@+id/microphone"/>
+
+    <ImageButton
+        android:id="@+id/microphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/microphone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/homepageFragment"
-        android:name="sg.edu.smu.cs461.cutn_mobileapp.fragment_homepage"
-        tools:layout="@layout/fragment_homepage"/>
+        android:id="@+id/categoryFragment"
+        android:name="sg.edu.smu.cs461.cutn_mobileapp.categoryFragment"
+        tools:layout="@layout/fragment_category"/>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/popularItemsFragment"
+        android:name="sg.edu.smu.cs461.cutn_mobileapp.popularitemsFragment"
+        tools:layout="@layout/fragment_popularitems"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,18 +54,20 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         if(result.moveToFirst()){
             do{
                 var curr = Product()
-                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
-                curr.productname = result.getString(result.getColumnIndex("productname"))
-                curr.quantity = result.getString(result.getColumnIndex("quantity"))
-                curr.description = result.getString(result.getColumnIndex("description"))
-                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
-                curr.country = result.getString(result.getColumnIndex("country"))
+                curr.productid = result.getString(result.getColumnIndex("PRODUCTID")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("PRODUCTNAME"))
+                curr.quantity = result.getString(result.getColumnIndex("QUANTITY"))
+                curr.description = result.getString(result.getColumnIndex("DESCRIPTION"))
+                curr.price = result.getString(result.getColumnIndex("PRICE")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("COUNTRY"))
+                curr.category = result.getString(result.getColumnIndex("CATEGORY"))
                 list.add(curr)
             }while(result.moveToNext())
         }
 
         result.close()
         db.close()
+//        Log.i("list",)
         return list
     }
 
@@ -77,12 +79,13 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         if(result.moveToFirst()){
             do{
                 var curr = Product()
-                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
-                curr.productname = result.getString(result.getColumnIndex("productname"))
-                curr.quantity = result.getString(result.getColumnIndex("quantity"))
-                curr.description = result.getString(result.getColumnIndex("description"))
-                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
-                curr.country = result.getString(result.getColumnIndex("country"))
+                curr.productid = result.getString(result.getColumnIndex("PRODUCTID")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("PRODUCTNAME"))
+                curr.quantity = result.getString(result.getColumnIndex("QUANTITY"))
+                curr.description = result.getString(result.getColumnIndex("DESCRIPTION"))
+                curr.price = result.getString(result.getColumnIndex("PRICE")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("COUNTRY"))
+                curr.category = result.getString(result.getColumnIndex("CATEGORY"))
                 list.add(curr)
             }while(result.moveToNext())
         }
@@ -101,12 +104,13 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         if(result.moveToFirst()){
             do{
                 var curr = Product()
-                curr.productid = result.getString(result.getColumnIndex("productid")).toInt()
-                curr.productname = result.getString(result.getColumnIndex("productname"))
-                curr.quantity = result.getString(result.getColumnIndex("quantity"))
-                curr.description = result.getString(result.getColumnIndex("description"))
-                curr.price = result.getString(result.getColumnIndex("price")).toFloat()
-                curr.country = result.getString(result.getColumnIndex("country"))
+                curr.productid = result.getString(result.getColumnIndex("PRODUCTID")).toInt()
+                curr.productname = result.getString(result.getColumnIndex("PRODUCTNAME"))
+                curr.quantity = result.getString(result.getColumnIndex("QUANTITY"))
+                curr.description = result.getString(result.getColumnIndex("DESCRIPTION"))
+                curr.price = result.getString(result.getColumnIndex("PRICE")).toFloat()
+                curr.country = result.getString(result.getColumnIndex("COUNTRY"))
+                curr.category = result.getString(result.getColumnIndex("CATEGORY"))
                 list.add(curr)
             }while(result.moveToNext())
         }
