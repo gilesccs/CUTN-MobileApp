@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,16 +36,5 @@ class fragment_homepage : Fragment(), View.OnClickListener {
 //        val myIntent = Intent(activity, DetailsActivity::class.java)
 //        myIntent.putExtra("pokemon_name", tag)
 //        startActivity(myIntent)
-    }
-
-    private fun generateDummyList(size: Int): List<Product>{
-        val list = ArrayList<Product>()
-
-        for (i in 0 until size){
-            val item = Product("Item $i", "Line 2")
-            list += item
-        }
-
-        return list
     }
 }

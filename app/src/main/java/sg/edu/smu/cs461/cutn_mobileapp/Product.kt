@@ -17,9 +17,9 @@ class Product{
         this.country = country
     }
 
-    constructor(productname: String,description: String){
+    constructor(productname: String,price: Float){
         this.productname = productname
-        this.description = description
+        this.price = price
     }
 
     constructor(){
