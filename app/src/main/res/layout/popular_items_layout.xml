@@ -35,10 +35,10 @@
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/country"
+            android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country"
+            android:text="quantity"
             android:layout_below="@id/price"
             android:textColor="@color/black"/>
 
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:layout_below="@id/country"
+            android:layout_below="@id/quantity"
             android:textColor="@color/black"/>
 
     </RelativeLayout>

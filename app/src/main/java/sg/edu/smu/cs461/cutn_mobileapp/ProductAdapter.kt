@@ -11,7 +11,6 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         var productView = LayoutInflater.from(parent.context).inflate(R.layout.popular_items_layout, parent, false)
-
         return ProductViewHolder(productView)
     }
 
@@ -19,7 +18,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
         val currentProduct = productList[position]
         holder.productName.text = currentProduct.productname
         holder.price.text = "$" + currentProduct.price.toString()
-        holder.country.text = currentProduct.country
+        holder.quantity.text = currentProduct.quantity
         holder.description.text = currentProduct.description
     }
 
@@ -31,7 +30,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
 //        val imageView: ImageView = productView.findViewById(R.id.imageView)
         val productName: TextView = productView.findViewById(R.id.productName)
         val price: TextView = productView.findViewById(R.id.price)
-        val country: TextView = productView.findViewById(R.id.country)
+        val quantity: TextView = productView.findViewById(R.id.quantity)
         val description: TextView = productView.findViewById(R.id.description)
     }
 }
