@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">CUTN-MobileApp</string>
-    <string-array name="defns">
-        <item>SMU</item>
-        <item>SCIS</item>
-        <item>SESS</item>
-    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
