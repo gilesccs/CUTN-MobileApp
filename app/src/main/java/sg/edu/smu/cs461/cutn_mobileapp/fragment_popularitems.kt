@@ -19,15 +19,20 @@ class fragment_popularitems : Fragment(), View.OnClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // code to be written here
+        viewRewards(this)
+    }
+
+    private fun viewRewards(view: fragment_homepage) {
+        val rewardsBtn = activity?.findViewById<ImageButton>(R.id.rewards)
+        rewardsBtn?.setOnClickListener{
+            val it = Intent(activity, Rewards::class.java)
+            startActivityForResult(it, 4321)
+        }
     }
 
     override fun onClick(v: View?) {
-        // code to be written here
-        val button = v as ImageButton
-        val tag = button.tag.toString()
 
-//        val myIntent = Intent(activity, DetailsActivity::class.java)
-//        myIntent.putExtra("pokemon_name", tag)
-//        startActivity(myIntent)
     }
+
+
 }
