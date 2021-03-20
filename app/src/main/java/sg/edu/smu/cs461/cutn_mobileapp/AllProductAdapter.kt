@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
 class AllProductAdapter(var context: Context, var products: List<Product> = arrayListOf()) :
-    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductAdapter.ViewHolder {
+    RecyclerView.Adapter<AllProductAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): AllProductAdapter.ViewHolder {
         // The layout design used for each list item
         val view = LayoutInflater.from(context).inflate(R.layout.product_row_item, null)
         return ViewHolder(view)
@@ -22,7 +22,7 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
     // This returns the size of the list.
     override fun getItemCount(): Int = products.size
 
-    override fun onBindViewHolder(viewHolder: ProductAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: AllProductAdapter.ViewHolder, position: Int) {
         //we simply call the `bindProduct` function here
         val product = products[position]
         viewHolder.bindProduct(products[position])
