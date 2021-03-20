@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductAdapter(var context: Context, var products: List<Product> = arrayListOf()) :
@@ -19,16 +21,23 @@ class ProductAdapter(var context: Context, var products: List<Product> = arrayLi
 
     override fun onBindViewHolder(viewHolder: ProductAdapter.ViewHolder, position: Int) {
         //we simply call the `bindProduct` function here
-        viewHolder.bindProduct(products[position])
+        val product = products[position]
+        viewHolder.itemView.
+//        viewHolder.bindProduct(products[position])
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val product_name: TextView = view.findViewById(R.id.product_name)
+        val product_price: TextView = view.findViewById(R.id.product_price)
+        val product_image: ImageView = view.findViewById(R.id.product_image)
 
         // This displays the product information for each item
         fun bindProduct(product: Product) {
 
-            itemView.product_name.text = product.name
-            itemView.product_price.text = "$${product.price.toString()}"
+//            itemView.product_name.text = product.name
+            this.product_name.text = product.productname
+            this.product_price.text = "$${product.price.toString()}"
+            this.product_image.setImageResource(R.drawable.)
 //            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
 
         }

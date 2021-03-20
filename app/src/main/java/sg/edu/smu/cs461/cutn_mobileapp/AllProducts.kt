@@ -1,17 +1,19 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.RecyclerView
 
 
 class AllProducts : AppCompatActivity() {
 
     private lateinit var productAdapter: ProductAdapter
     private var products = listOf<Product>()
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var products_recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,7 @@ class AllProducts : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val swipeRefreshLayout = findViewById<androidx.swiperefreshlayout>(R.id.swipeRefreshLayout)
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
 
         swipeRefreshLayout.isRefreshing = true
@@ -40,14 +42,14 @@ class AllProducts : AppCompatActivity() {
         swipeRefreshLayout.isRefreshing = false
 //        products = response.body()!!
         val myDBHelper = MyDBHelper(this)
-        products = myDBHelper.readByCategory()
+        products = myDBHelper.readByCategory("fruits")
 
         productAdapter = ProductAdapter(this, products)
 
+        products_recyclerview = findViewById(R.id.products_recyclerview)
         products_recyclerview.adapter = productAdapter
         productAdapter.notifyDataSetChanged()
 
 
     }
-}
 }
