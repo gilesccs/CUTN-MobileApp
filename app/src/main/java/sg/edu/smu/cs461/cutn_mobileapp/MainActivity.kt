@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        individualPage()
 //        val myDBHelper = MyDBHelper(this)
 //        val list = myDBHelper.readData()
 //        Log.i("test",list.get(0).productname)
@@ -52,5 +53,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         return list
+    }
+
+    private fun individualPage() {
+        val rewardsBtn = findViewById<ImageButton>(R.id.microphone)
+        rewardsBtn?.setOnClickListener{
+            val it = Intent(this, IndividualProduct::class.java)
+            startActivityForResult(it, 4321)
+        }
     }
 }
