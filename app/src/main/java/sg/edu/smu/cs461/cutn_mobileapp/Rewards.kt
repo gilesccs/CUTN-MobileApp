@@ -65,6 +65,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 .setSmallIcon(R.drawable.ic_baseline_beenhere_24)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingNotiIntent)
+                .setAutoCancel(true)
                 .build()
 
         NOT_MANAGER = NotificationManagerCompat.from(this)
