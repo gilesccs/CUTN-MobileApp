@@ -113,12 +113,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_below="@id/elasticViewImage"
-        android:layout_toRightOf="@+id/productPriceLabel"
+
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="200dp"
         app:textSize="10sp"
         app:textColor="@color/black"
         app:backGroundColor="#dbd0bf"/>
@@ -202,7 +201,7 @@
             android:layout_below="@id/recommendationLabel"
             android:layout_marginLeft="27dp"
             android:layout_marginRight="27dp"
-            android:layout_marginBottom="60dp">
+            android:layout_marginBottom="65dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
@@ -224,7 +223,7 @@
                 android:layout_marginTop="5dp"
 
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/popularItems"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/popularItems"
@@ -233,9 +232,9 @@
             </ImageButton>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Fuji Apple"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="#000000"
@@ -261,7 +260,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/popularItems"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/popularItems"
@@ -269,8 +268,8 @@
             </ImageButton>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
                 android:textAlignment="center"
                 android:text="Banana"
                 android:fontFamily="sans-serif-condensed"
@@ -284,9 +283,8 @@
     <com.skydoves.elasticviews.ElasticButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recommendationWrapper"
         android:text="Add to Cart"
-        android:layout_marginTop="-40dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
         android:layout_marginBottom="10dp"
