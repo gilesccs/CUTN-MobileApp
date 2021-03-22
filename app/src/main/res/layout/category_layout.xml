@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="124dp"
+    android:layout_height="200dp"
+    android:layout_marginRight="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="4dp">
+
+        <ImageView
+            android:id="@+id/imageViewCategory"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/fruits2" />
+
+        <TextView
+            android:id="@+id/categoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageViewCategory"
+            android:textColor="@color/black"
+            android:text="Category Name"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

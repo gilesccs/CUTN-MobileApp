@@ -26,6 +26,10 @@ class Product{
         this.description = description
     }
 
+    constructor(category: String){
+        this.category = category
+    }
+
     constructor(){
 
     }

@@ -45,7 +45,7 @@
         android:id="@+id/searchForProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="100dp"
         android:hint="Search For Product"
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"

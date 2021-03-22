@@ -19,21 +19,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         individualPage()
-//        val myDBHelper = MyDBHelper(this)
-//        val list = myDBHelper.readData()
-//        Log.i("test",list.get(0).productname)
 
-        val productList = generateDummyList(5)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = ProductAdapter(productList)
+        val productList = generateDummyListForPopularItem(5)
+        val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
+        recyclerViewPopularItem.adapter = ProductAdapter(productList)
+        recyclerViewPopularItem.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        recyclerViewPopularItem.setHasFixedSize(true)
 
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        recyclerView.setHasFixedSize(true)
+        val categoryList = generateDummyListForCategory(4)
+        val recyclerViewCategory = findViewById<RecyclerView>(R.id.recyclerViewCategory)
+        recyclerViewCategory.adapter = CategoryAdapter(categoryList)
+        recyclerViewCategory.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        recyclerViewCategory.setHasFixedSize(true)
     }
 
-
-
-    private fun generateDummyList(size: Int): List<Product>{
+    private fun generateDummyListForPopularItem(size: Int): List<Product>{
         val myDBHelper = MyDBHelper(this)
         val list = myDBHelper.readData()
 
@@ -41,9 +41,31 @@ class MainActivity : AppCompatActivity() {
             val item = Product("${list.get(i).productname}", list.get(i).price, list.get(i).quantity, list.get(i).description)
             list += item
         }
-
         return list
     }
+
+    private fun generateDummyListForCategory(size: Int): List<Product>{
+        val list = ArrayList<Product>()
+        val categoryList = listOf("Fruits","Vegetables","Packages")
+
+        for (i in 0 until size){
+            var j = i
+            val drawable = when (i%3){
+                0 -> R.drawable.fruits2
+                1 -> R.drawable.vegetable
+                else -> R.drawable.milk
+            }
+
+            if (j > 2){
+                j = 0
+            }
+
+            val item = Product(categoryList.get(j))
+            list += item
+        }
+        return list
+    }
+
 
     private fun individualPage() {
         val rewardsBtn = findViewById<ImageButton>(R.id.microphone)
