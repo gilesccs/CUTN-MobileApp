@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "sg.edu.smu.cs461.cutn_mobileapp"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -56,10 +56,13 @@ dependencies {
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
     implementation 'nl.dionsegijn:konfetti:1.3.2'
 
+    implementation "com.github.skydoves:elasticviews:2.0.9"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    implementation 'com.github.armcha:ElasticView:0.2.0'
 }
