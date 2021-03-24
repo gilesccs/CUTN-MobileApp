@@ -44,23 +44,24 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    private fun generateDummyListForCategory(size: Int): List<Product>{
-        val list = ArrayList<Product>()
-        val categoryList = listOf("Fruits","Vegetables","Packages")
+    private fun generateDummyListForCategory(size: Int): List<Category>{
+        val list = ArrayList<Category>()
+        val categoryList = listOf("Fruits","Vegetables","Packages","Snack")
 
         for (i in 0 until size){
             var j = i
-            val drawable = when (i%3){
+            val drawable = when (i%4){
                 0 -> R.drawable.fruits2
                 1 -> R.drawable.vegetable
-                else -> R.drawable.milk
+                2 -> R.drawable.milk
+                else -> R.drawable.snack
             }
 
-            if (j > 2){
+            if (j > 3){
                 j = 0
             }
 
-            val item = Product(categoryList.get(j))
+            val item = Category(drawable,categoryList.get(j))
             list += item
         }
         return list

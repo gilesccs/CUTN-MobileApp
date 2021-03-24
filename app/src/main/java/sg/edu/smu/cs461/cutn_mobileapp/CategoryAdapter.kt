@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter (private val productList: List<Product>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(){
+class CategoryAdapter (private val productList: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         var categoryView = LayoutInflater.from(parent.context).inflate(R.layout.category_layout, parent, false)
         return CategoryViewHolder(categoryView)
@@ -16,6 +16,7 @@ class CategoryAdapter (private val productList: List<Product>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val currentProduct = productList[position]
         holder.categoryName.text = currentProduct.category
+        holder.imageViewCategory.setImageResource(currentProduct.imageResource)
     }
 
     override fun getItemCount(): Int {
