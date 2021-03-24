@@ -23,7 +23,7 @@
             android:layout_below="@id/imageViewPopularItem"
             android:text="Product Name"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
