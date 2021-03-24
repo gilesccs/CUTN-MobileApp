@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val productList = generateDummyListForPopularItem(5)
         val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
-        recyclerViewPopularItem.adapter = ProductAdapter(productList)
+        recyclerViewPopularItem.adapter = PopularItemAdapter(productList)
         recyclerViewPopularItem.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerViewPopularItem.setHasFixedSize(true)
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         recyclerViewCategory.setHasFixedSize(true)
     }
 
-    private fun generateDummyListForPopularItem(size: Int): List<Product>{
+    private fun generateDummyListForPopularItem(size: Int): List<PopularItem>{
         val myDBHelper = MyDBHelper(this)
         val list = myDBHelper.readData()
 
@@ -41,7 +41,21 @@ class MainActivity : AppCompatActivity() {
             val item = Product("${list.get(i).productname}", list.get(i).price, list.get(i).quantity, list.get(i).description)
             list += item
         }
-        return list
+
+        val list2 = ArrayList<PopularItem>()
+        for (i in 0 until size){
+            var j = i
+            val drawable = when (i%4){
+                0 -> R.drawable.r1
+                1 -> R.drawable.r2
+                2 -> R.drawable.r3
+                else -> R.drawable.r4
+            }
+
+            val item = PopularItem(drawable,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity)
+            list2 += item
+        }
+        return list2
     }
 
     private fun generateDummyListForCategory(size: Int): List<Category>{

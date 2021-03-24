@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/imageViewPopularItem"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/ic_baseline_fastfood_24" />
 
         <TextView
