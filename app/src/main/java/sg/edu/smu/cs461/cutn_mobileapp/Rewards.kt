@@ -118,7 +118,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         running = true
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if(stepSensor == null) {
-            Toast.makeText(this,"Please Accept permissions to access pedometer", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Pedometer might not work in your device!", Toast.LENGTH_LONG).show()
         }else{
             sensorManager?.registerListener(this,stepSensor,SensorManager.SENSOR_DELAY_UI)
         }
