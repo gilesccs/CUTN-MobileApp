@@ -1,5 +1,6 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.paperdb.Paper
+import kotlinx.android.synthetic.main.activity_all_products.*
 
 
 class AllProducts : AppCompatActivity() {
@@ -58,6 +60,11 @@ class AllProducts : AppCompatActivity() {
             Log.i("ERROR",e.toString())
         }
 
+        showCart.setOnClickListener {
+            Log.i("cart","Button pressed!")
+            startActivity(Intent(this, ShoppingCartActivity::class.java))
+        }
+
 
     }
 
@@ -83,4 +90,6 @@ class AllProducts : AppCompatActivity() {
 
 
     }
+
+
 }
