@@ -61,6 +61,15 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         val productList = generateDummyListForPopularItem(5)
         val adapter = PopularItemAdapter(productList, this)
         val clickedItem: PopularItem = productList[position]
+
+        val it = Intent(this, IndividualProduct::class.java)
+        it.putExtra("Product Name", clickedItem.productname)
+        it.putExtra("Description", clickedItem.description)
+        it.putExtra("Price", clickedItem.price)
+        it.putExtra("Quantity", clickedItem.quantity)
+        it.putExtra("Country", clickedItem.country)
+        startActivityForResult(it, 4321)
+
         Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
         clickedItem.productname = "Clicked"
         adapter.notifyItemChanged(position)
@@ -85,7 +94,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
                 else -> R.drawable.r4
             }
 
-            val item = PopularItem(drawable,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity)
+            val item = PopularItem(drawable,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity,list.get(j).country)
             list2 += item
         }
         return list2
