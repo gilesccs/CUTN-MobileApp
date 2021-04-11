@@ -47,14 +47,16 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.i("test",requestCode.toString())
-        if(requestCode == SPEECH_CODE){
-            Log.i("test","yup")
+        Log.i("test", requestCode.toString())
+        if (requestCode == SPEECH_CODE) {
+            Log.i("test", "yup")
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             val searchBtn = findViewById<EditText>(R.id.searchForProduct)
-            Log.i("test","result is " + result?.get(0).toString())
+            Log.i("test", "result is " + result?.get(0).toString())
             searchBtn.setText(result?.get(0).toString())
         }
+    }
+    
     override fun onItemClick(position: Int) {
         val productList = generateDummyListForPopularItem(5)
         val adapter = PopularItemAdapter(productList, this)
