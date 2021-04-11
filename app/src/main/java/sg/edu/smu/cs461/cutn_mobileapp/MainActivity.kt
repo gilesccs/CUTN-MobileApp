@@ -9,13 +9,10 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.View
-<<<<<<< Updated upstream
 import android.widget.*
-=======
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
->>>>>>> Stashed changes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
@@ -48,7 +45,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         recyclerViewCategory.setHasFixedSize(true)
     }
 
-<<<<<<< Updated upstream
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.i("test",requestCode.toString())
@@ -59,7 +55,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             Log.i("test","result is " + result?.get(0).toString())
             searchBtn.setText(result?.get(0).toString())
         }
-=======
     override fun onItemClick(position: Int) {
         val productList = generateDummyListForPopularItem(5)
         val adapter = PopularItemAdapter(productList, this)
@@ -67,7 +62,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
         clickedItem.productname = "Clicked"
         adapter.notifyItemChanged(position)
->>>>>>> Stashed changes
     }
 
     private fun generateDummyListForPopularItem(size: Int): List<PopularItem>{
