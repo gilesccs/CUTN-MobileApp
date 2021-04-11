@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             searchBtn.setText(result?.get(0).toString())
         }
     }
-    
+
     override fun onItemClick(position: Int) {
         val productList = generateDummyListForPopularItem(5)
         val adapter = PopularItemAdapter(productList, this)
@@ -98,10 +98,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         for (i in 0 until size){
             var j = i
             val drawable = when (i%4){
-                0 -> R.drawable.fruits2
-                1 -> R.drawable.vegetable
+                0 -> R.drawable.fr
+                1 -> R.drawable.vg2
                 2 -> R.drawable.milk
-                else -> R.drawable.snack
+                else -> R.drawable.snacks
             }
 
             if (j > 3){
