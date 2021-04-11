@@ -75,11 +75,13 @@
         app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/categoryFragment"
         android:name="sg.edu.smu.cs461.cutn_mobileapp.categoryFragment"
-        tools:layout="@layout/fragment_category"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_category"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <fragment
         android:layout_width="match_parent"
