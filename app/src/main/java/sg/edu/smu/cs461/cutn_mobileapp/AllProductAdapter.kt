@@ -1,5 +1,6 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import org.w3c.dom.Text
 
 class AllProductAdapter(var context: Context, var products: List<Product> = arrayListOf()) :
     RecyclerView.Adapter<AllProductAdapter.ViewHolder>() {
@@ -19,6 +24,7 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
         return ViewHolder(view)
 
     }
+
     // This returns the size of the list.
     override fun getItemCount(): Int = products.size
 
@@ -36,6 +42,7 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
         val removeItem: ImageButton = view.findViewById(R.id.removeItem)
 
         // This displays the product information for each item
+        @SuppressLint("CheckResult")
         fun bindProduct(product: Product) {
 
 //            itemView.product_name.text = product.name
@@ -44,35 +51,55 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
             this.product_price.text = product.price.toString()
             this.product_image.setImageResource(R.drawable.r1)
 //            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
-            this.addToCart.setOnClickListener { view ->
 
-                val item = CartItem(product)
+            Observable.create(ObservableOnSubscribe<MutableList<CartItem>> {
 
-                ShoppingCart.addItem(item)
-                //notify users
+                this.addToCart.setOnClickListener { view ->
+
+                    val item = CartItem(product)
+
+                    ShoppingCart.addItem(item)
+                    //notify users
 //                Snackbar.make(
 //                    (itemView.context as MainActivity).coordinator,
 //                    "${product.name} added to your cart",
 //                    Snackbar.LENGTH_LONG
 //                ).show()
+//                Toast.makeText(
+//                    this.context,
+//                    product.productname + " added to your cart",
+//                    Toast.LENGTH_SHORT
+//                ).show()
 //                Snac
-                Log.i("item","Added to cart: ${product.productname}")
+                    Log.i("item", "Added to cart: ${product.productname}")
+                    it.onNext(ShoppingCart.getCart())
 
-            }
+                }
 
-            this.removeItem.setOnClickListener { view ->
+                this.removeItem.setOnClickListener { view ->
 
-                val item = CartItem(product)
+                    val item = CartItem(product)
 
-                ShoppingCart.removeItem(item, itemView.context)
+                    ShoppingCart.removeItem(item, itemView.context)
 
 //                Snackbar.make(
 //                    (itemView.context as MainActivity).coordinator,
 //                    "${product.name} removed from your cart",
 //                    Snackbar.LENGTH_LONG
 //                ).show()
-                Log.i("item","Removed from cart: ${product.productname}")
+                    Log.i("item", "Removed from cart: ${product.productname}")
+                    it.onNext(ShoppingCart.getCart())
+                }
+            }).subscribe { cart ->
+                var quantity = 0
 
+                cart.forEach { cartItem ->
+                    quantity += cartItem.quantity
+                }
+
+                (itemView.context as AllProducts).findViewById<TextView>(R.id.cart_size).text = quantity.toString()
+
+//                Toast.makeText(this.context, "Cart size $quantity", Toast.LENGTH_SHORT).show()
             }
         }
 

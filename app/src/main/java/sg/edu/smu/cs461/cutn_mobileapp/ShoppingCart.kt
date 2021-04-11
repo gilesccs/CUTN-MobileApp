@@ -6,7 +6,7 @@ import io.paperdb.Paper
 class ShoppingCart {
     companion object {
         fun addItem(cartItem: CartItem) {
-            val cart = ShoppingCart.getCart()
+            val cart = getCart()
 
             val targetItem = cart.singleOrNull { it.product.productid == cartItem.product.productid }
             if (targetItem == null) {
@@ -15,11 +15,11 @@ class ShoppingCart {
             } else {
                 targetItem.quantity++
             }
-            ShoppingCart.saveCart(cart)
+            saveCart(cart)
         }
 
         fun removeItem(cartItem: CartItem, context: Context) {
-            val cart = ShoppingCart.getCart()
+            val cart = getCart()
 
             val targetItem = cart.singleOrNull { it.product.productid == cartItem.product.productid }
             if (targetItem != null) {
@@ -30,7 +30,7 @@ class ShoppingCart {
                 }
             }
 
-            ShoppingCart.saveCart(cart)
+            saveCart(cart)
         }
 
         fun saveCart(cart: MutableList<CartItem>) {
@@ -43,7 +43,7 @@ class ShoppingCart {
 
         fun getShoppingCartSize(): Int {
             var cartSize = 0
-            ShoppingCart.getCart().forEach {
+            getCart().forEach {
                 cartSize += it.quantity;
             }
 
