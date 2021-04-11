@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_shopping_basket"
             android:tint="@android:color/white"
+            android:onClick="goToShoppingCart"
             app:fabSize="normal" />
 
         <TextView

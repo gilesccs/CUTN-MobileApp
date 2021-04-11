@@ -1,3 +1,5 @@
+package sg.edu.smu.cs461.cutn_mobileapp
+
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
@@ -40,7 +42,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         total_price.text = "$${totalPrice}"
     }
 
-     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item?.itemId) {
             android.R.id.home -> {

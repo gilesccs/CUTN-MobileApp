@@ -3,6 +3,7 @@ package sg.edu.smu.cs461.cutn_mobileapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -54,18 +55,25 @@ class AllProducts : AppCompatActivity() {
                     StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
                 getProducts()
+                showCart.setOnClickListener {
+                    Log.i("cart","Button pressed!")
+                    startActivity(Intent(this, ShoppingCartActivity::class.java))
+                }
+
             }
 
         } catch (e: Exception) {
             Log.i("ERROR",e.toString())
         }
 
-        showCart.setOnClickListener {
-            Log.i("cart","Button pressed!")
-            startActivity(Intent(this, ShoppingCartActivity::class.java))
-        }
 
 
+
+    }
+
+    fun goToShoppingCart(view: View){
+        Log.i("cart","Button pressed!")
+        startActivity(Intent(this, ShoppingCartActivity::class.java))
     }
 
 
