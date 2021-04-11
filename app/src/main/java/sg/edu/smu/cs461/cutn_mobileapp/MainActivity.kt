@@ -19,39 +19,65 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         individualPage()
-//        val myDBHelper = MyDBHelper(this)
-//        val list = myDBHelper.readData()
-//        Log.i("test",list.get(0).productname)
 
-        val productList = generateDummyList(5)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = ProductAdapter(productList)
+        val productList = generateDummyListForPopularItem(5)
+        val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
+        recyclerViewPopularItem.adapter = PopularItemAdapter(productList)
+        recyclerViewPopularItem.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        recyclerViewPopularItem.setHasFixedSize(true)
 
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        recyclerView.setHasFixedSize(true)
+        val categoryList = generateDummyListForCategory(4)
+        val recyclerViewCategory = findViewById<RecyclerView>(R.id.recyclerViewCategory)
+        recyclerViewCategory.adapter = CategoryAdapter(categoryList)
+        recyclerViewCategory.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        recyclerViewCategory.setHasFixedSize(true)
     }
 
-
-
-    private fun generateDummyList(size: Int): List<Product>{
-//        val list = ArrayList<Product>()
-//        list.add(Product("fuji Apple",5f,"fuji","fresh imported apples from fuji"))
-//        list.add(Product("fuji Orange",3.99f,"fuji","fresh imported orange from fuji"))
-//        list.add(Product("fuji melon",50f,"fuji","fresh imported melon from fuji"))
-//        list.add(Product("fuji strawberry",15f,"fuji","fresh imported strawberry from fuji"))
-//        list.add(Product("Tokyo banana",7.99f,"Tokyo","fresh imported banana from Tokyo"))
-
+    private fun generateDummyListForPopularItem(size: Int): List<PopularItem>{
         val myDBHelper = MyDBHelper(this)
         val list = myDBHelper.readData()
-//        Log.i("test", list[3].description)
 
         for (i in 0 until size){
-//            val item = Product("Item: ${list.get(i).productname}", list.get(i).price)
-//            val item = Product("Item: $i", 9.99f,"Singapore","apples from Singapore")
-            val item = Product("${list.get(i).productname}", list.get(i).price, list.get(i).country, list.get(i).description)
+            val item = Product("${list.get(i).productname}", list.get(i).price, list.get(i).quantity, list.get(i).description)
             list += item
         }
 
+        val list2 = ArrayList<PopularItem>()
+        for (i in 0 until size){
+            var j = i
+            val drawable = when (i%4){
+                0 -> R.drawable.r1
+                1 -> R.drawable.r2
+                2 -> R.drawable.r3
+                else -> R.drawable.r4
+            }
+
+            val item = PopularItem(drawable,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity)
+            list2 += item
+        }
+        return list2
+    }
+
+    private fun generateDummyListForCategory(size: Int): List<Category>{
+        val list = ArrayList<Category>()
+        val categoryList = listOf("Fruits","Vegetables","Packages","Snack")
+
+        for (i in 0 until size){
+            var j = i
+            val drawable = when (i%4){
+                0 -> R.drawable.fruits2
+                1 -> R.drawable.vegetable
+                2 -> R.drawable.milk
+                else -> R.drawable.snack
+            }
+
+            if (j > 3){
+                j = 0
+            }
+
+            val item = Category(drawable,categoryList.get(j))
+            list += item
+        }
         return list
     }
 
@@ -61,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("TABLE CALLED","TEST")
     }
     
+
     private fun individualPage() {
         val rewardsBtn = findViewById<ImageButton>(R.id.microphone)
         rewardsBtn?.setOnClickListener{
