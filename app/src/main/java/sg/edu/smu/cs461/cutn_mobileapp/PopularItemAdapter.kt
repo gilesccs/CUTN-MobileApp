@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PopularItemAdapter (private val productList: List<PopularItem>) : RecyclerView.Adapter<PopularItemAdapter.PopularItemViewHolder>(){
+class PopularItemAdapter (private val productList: List<PopularItem>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PopularItemAdapter.PopularItemViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularItemViewHolder {
         var popularItemView = LayoutInflater.from(parent.context).inflate(R.layout.popular_items_layout, parent, false)
         return PopularItemViewHolder(popularItemView)
@@ -26,11 +26,26 @@ class PopularItemAdapter (private val productList: List<PopularItem>) : Recycler
         return productList.size
     }
 
-    class PopularItemViewHolder(popularItemView: View) : RecyclerView.ViewHolder(popularItemView) {
+    inner class PopularItemViewHolder(popularItemView: View) : RecyclerView.ViewHolder(popularItemView), View.OnClickListener {
         val imageViewPopularItem: ImageView = popularItemView.findViewById(R.id.imageViewPopularItem)
         val productName: TextView = popularItemView.findViewById(R.id.productName)
         val description: TextView = popularItemView.findViewById(R.id.description)
         val price: TextView = popularItemView.findViewById(R.id.price)
         val quantity: TextView = popularItemView.findViewById(R.id.quantity)
+
+        init {
+            popularItemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

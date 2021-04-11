@@ -9,13 +9,19 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.View
+<<<<<<< Updated upstream
 import android.widget.*
+=======
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.Toast
+>>>>>>> Stashed changes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener {
     private var REQ_CODE = 3213
     private lateinit var gotoRewards: ImageView
     private var SPEECH_CODE = 1999
@@ -31,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         val productList = generateDummyListForPopularItem(5)
         val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
-        recyclerViewPopularItem.adapter = PopularItemAdapter(productList)
+        recyclerViewPopularItem.adapter = PopularItemAdapter(productList, this)
         recyclerViewPopularItem.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerViewPopularItem.setHasFixedSize(true)
 
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         recyclerViewCategory.setHasFixedSize(true)
     }
 
+<<<<<<< Updated upstream
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.i("test",requestCode.toString())
@@ -52,6 +59,15 @@ class MainActivity : AppCompatActivity() {
             Log.i("test","result is " + result?.get(0).toString())
             searchBtn.setText(result?.get(0).toString())
         }
+=======
+    override fun onItemClick(position: Int) {
+        val productList = generateDummyListForPopularItem(5)
+        val adapter = PopularItemAdapter(productList, this)
+        val clickedItem: PopularItem = productList[position]
+        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
+        clickedItem.productname = "Clicked"
+        adapter.notifyItemChanged(position)
+>>>>>>> Stashed changes
     }
 
     private fun generateDummyListForPopularItem(size: Int): List<PopularItem>{
