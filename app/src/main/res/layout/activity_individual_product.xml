@@ -27,7 +27,7 @@
 
 
     <TextView
-        android:id="@+id/productNameLabel"
+        android:id="@+id/classifierLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -44,7 +44,7 @@
         android:id="@+id/locationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/productNameLabel"
+        android:layout_below="@+id/classifierLabel"
         android:layout_centerInParent="true"
         android:layout_marginTop="-8dp"
         android:fontFamily="@font/baloo"
@@ -58,6 +58,7 @@
         android:id="@+id/elasticViewImage"
         android:layout_width="350dp"
         android:layout_height="280dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/productNameLabel"
         android:layout_centerInParent="true"
         android:layout_marginTop="25dp"

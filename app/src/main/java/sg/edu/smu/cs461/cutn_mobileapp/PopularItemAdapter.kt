@@ -1,10 +1,12 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 class PopularItemAdapter (private val productList: List<PopularItem>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PopularItemAdapter.PopularItemViewHolder>(){
@@ -20,6 +22,7 @@ class PopularItemAdapter (private val productList: List<PopularItem>, private va
         holder.description.text = "Description: " + currentProduct.description
         holder.price.text = "Price: $" + currentProduct.price.toString()
         holder.quantity.text = "Quantity: " + currentProduct.quantity
+        holder.cardView.setCardBackgroundColor(Color.rgb(243,241,235))
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +35,7 @@ class PopularItemAdapter (private val productList: List<PopularItem>, private va
         val description: TextView = popularItemView.findViewById(R.id.description)
         val price: TextView = popularItemView.findViewById(R.id.price)
         val quantity: TextView = popularItemView.findViewById(R.id.quantity)
-
+        val cardView: CardView = popularItemView.findViewById(R.id.cardView)
         init {
             popularItemView.setOnClickListener(this)
         }

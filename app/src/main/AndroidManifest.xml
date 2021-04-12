@@ -4,6 +4,13 @@
     package="sg.edu.smu.cs461.cutn_mobileapp">
 
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <!-- Make sure the device has a camera. If you use android.hardware.camera without .any,
+    it will not work if you have a device without a back camera, such as most Chromebooks. -->
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <!-- Specifying that the app will need camera permission -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -15,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CUTNMobileApp"
         tools:replace="android:theme">
+        <activity android:name=".Classifier"></activity>
         <activity android:name=".IndividualProduct" />
         <activity android:name=".Rewards" />
         <activity android:name=".AllProducts" />
