@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_all_products.*
+import java.util.concurrent.TimeUnit
 
 
 class AllProducts : AppCompatActivity() {
@@ -20,6 +21,7 @@ class AllProducts : AppCompatActivity() {
     private var products = listOf<Product>()
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var products_recyclerview: RecyclerView
+    private var category = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,12 @@ class AllProducts : AppCompatActivity() {
                 )
             )
             swipeRefreshLayout.isRefreshing = true
-            swipeRefreshLayout.setOnRefreshListener { getProducts() }
+            swipeRefreshLayout.setOnRefreshListener {
+//                products = emptyList()
+//                getProducts()
+                swipeRefreshLayout.isRefreshing = false
+                Log.i ("why","refreshing...")
+            }
 
         } catch (e: Exception) {
             Log.i("ERROR", e.toString())
@@ -50,17 +57,14 @@ class AllProducts : AppCompatActivity() {
 
         try {
             products_recyclerview = findViewById(R.id.products_recyclerview)
-            if (products_recyclerview != null) {
-                // assign a layout manager to the recycler view
-                products_recyclerview.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            // assign a layout manager to the recycler view
+            products_recyclerview.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-                getProducts()
-                showCart.setOnClickListener {
-                    Log.i("cart", "Button pressed!")
-                    startActivity(Intent(this, ShoppingCartActivity::class.java))
-                }
-
+            getProducts()
+            showCart.setOnClickListener {
+                Log.i("cart", "Button pressed!")
+                startActivity(Intent(this, ShoppingCartActivity::class.java))
             }
 
         } catch (e: Exception) {
@@ -78,12 +82,13 @@ class AllProducts : AppCompatActivity() {
 
     fun getProducts() {
 
-        swipeRefreshLayout.isRefreshing = false
 //        products = response.body()!!
         val myDBHelper = MyDBHelper(this)
 
         // GET FROM INTENT HERE
-        val category = intent.getStringExtra("category")?.toLowerCase()
+        if (category == "") {
+            category = intent.getStringExtra("category")?.toLowerCase().toString()
+        }
         Log.i("category", category.toString())
         products = category?.let { myDBHelper.readByCategory(it) }!!
         Log.i("products", products.toString())
@@ -100,6 +105,8 @@ class AllProducts : AppCompatActivity() {
         products_recyclerview = findViewById(R.id.products_recyclerview)
         products_recyclerview.adapter = productAdapter
         productAdapter.notifyDataSetChanged()
+
+        swipeRefreshLayout.isRefreshing = false
 
 
     }
