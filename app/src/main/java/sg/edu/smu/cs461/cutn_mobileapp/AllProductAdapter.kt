@@ -3,6 +3,7 @@ package sg.edu.smu.cs461.cutn_mobileapp
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -62,7 +64,16 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
             val resourceId = context.resources.getIdentifier(variableValue, "drawable",context.packageName)
             this.product_image.setImageResource(resourceId)
 
-            
+            this.product_image.setOnClickListener{
+                val it = Intent(context, IndividualProduct::class.java)
+                it.putExtra("ProductId", product.productid)
+                it.putExtra("ProductName", product.productname)
+                it.putExtra("Description", product.description)
+                it.putExtra("Price", product.price)
+                it.putExtra("Quantity", product.quantity)
+                it.putExtra("Country", product.country)
+                context.startActivity(it)
+            }
 //            itemView.product_image.setImageResource(Resources.getIdentifier(variableValue))
 //            itemView.product_image.setImageResource(ContextCompat.getDrawable(context, variableValue))
 //            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
