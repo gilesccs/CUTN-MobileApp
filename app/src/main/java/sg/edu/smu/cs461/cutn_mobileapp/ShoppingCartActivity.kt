@@ -39,6 +39,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         var totalPrice = ShoppingCart.getCart()
             .fold(0.toDouble()) { acc, cartItem -> acc + cartItem.quantity.times(cartItem.product.price!!.toDouble()) }
 
+        totalPrice = String.format("%.2f", totalPrice).toDouble()
         total_price.text = "$${totalPrice}"
     }
 
