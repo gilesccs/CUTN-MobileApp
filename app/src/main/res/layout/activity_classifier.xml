@@ -65,7 +65,7 @@
         android:text="Mexican Air-flown Avocado"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="12sp" />
+        android:textSize="17sp" />
 
     <fragment
         android:layout_width="match_parent"

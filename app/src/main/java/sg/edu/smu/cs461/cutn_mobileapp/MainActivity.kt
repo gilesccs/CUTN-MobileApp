@@ -46,15 +46,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         micBtn?.setOnClickListener{
             voiceInput()
         }
-<<<<<<< Updated upstream
 
         supportActionBar?.hide()
-=======
         val searchBarBtn = findViewById<ImageButton>(R.id.searchBtn)
         searchBarBtn.setOnClickListener{
             searchFromText()
         }
->>>>>>> Stashed changes
 //        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
@@ -99,7 +96,8 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 //            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
             Log.i("test", "result is " + result?.get(0).toString())
 //            searchBtn.setText(result?.get(0).toString())
-            Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
+            startClassifierWithText(result?.get(0).toString())
+//            Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
         } else {
             var pic = data?.getParcelableExtra<Bitmap>("data")
             if (pic === null) {
@@ -291,6 +289,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
     private fun startClassifierWithText(product:String) {
         val it = Intent(this, AllProducts::class.java)
+        Log.i("product",product)
         it.putExtra("product", product)
         startActivity(it)
     }

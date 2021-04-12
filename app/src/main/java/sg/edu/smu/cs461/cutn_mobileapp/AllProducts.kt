@@ -26,7 +26,7 @@ class AllProducts : AppCompatActivity() {
     private var products = listOf<Product>()
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var products_recyclerview: RecyclerView
-    private var category = ""
+//    private var category = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,12 +57,12 @@ class AllProducts : AppCompatActivity() {
                     R.color.colorPrimary
                 )
             )
-            swipeRefreshLayout.isRefreshing = true
+//            swipeRefreshLayout.isRefreshing = true
             swipeRefreshLayout.setOnRefreshListener {
 //                products = emptyList()
 //                getProducts()
                 swipeRefreshLayout.isRefreshing = false
-                Log.i ("why","refreshing...")
+                Log.i("why", "refreshing...")
             }
 
         } catch (e: Exception) {
@@ -100,35 +100,34 @@ class AllProducts : AppCompatActivity() {
         val myDBHelper = MyDBHelper(this)
 
         // GET FROM INTENT HERE
-        if (category == "") {
-            category = intent.getStringExtra("category")?.toLowerCase().toString()
-<<<<<<< Updated upstream
-            val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-            toolbar.title = category.capitalize()
-        }
-        Log.i("category", category.toString())
-        products = category?.let { myDBHelper.readByCategory(it) }!!
+        val category = intent.getStringExtra("category")
+        val keyword = intent.getStringExtra("product")
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        Log.i("keyword", category.toString())
+        Log.i("keyword", keyword.toString())
 
-=======
-            products = category?.let { myDBHelper.readByCategory(it) }!!
-        } else {
-            val keyword = intent.getStringExtra("product")
-            if (keyword != null) {
-                products = myDBHelper.readByMachineLearning(keyword)
-                if (products.size == 0) {
-                    MotionToast.createColorToast(this,
-                        "Sorry!",
-                        "No matching products found!",
-                        MotionToast.TOAST_WARNING,
-                        MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(this,R.font.helvetica_regular))
-                    return
-                }
+        if (category != null) {
+            Log.i("keyword","why are you here")
+            products = category.toString().toLowerCase().let { myDBHelper.readByCategory(it) }!!
+            toolbar.title = category.toString().capitalize()
+        }
+        else if (keyword != null) {
+            Log.i("keyword","OI WTF")
+            toolbar.title = "Search results for \"" + keyword.toString().capitalize() + "\""
+            products = myDBHelper.readByMachineLearning(keyword.toString())
+            if (products.size == 0) {
+                MotionToast.createColorToast(
+                    this,
+                    "Sorry!",
+                    "No matching products found!",
+                    MotionToast.TOAST_WARNING,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                )
             }
         }
         Log.i("category", category.toString())
->>>>>>> Stashed changes
         Log.i("products", products.toString())
 
 //        products = myDBHelper.readByCategory("fruits")
