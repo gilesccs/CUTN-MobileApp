@@ -1,17 +1,18 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_shopping_cart.*
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart.Companion.addItem
 import java.text.DecimalFormat
 
+
 class IndividualProduct : AppCompatActivity() {
+    var qty = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_individual_product)
@@ -97,6 +98,8 @@ class IndividualProduct : AppCompatActivity() {
             startActivity(it)
         }
         goBackHomePage()
+        addQtyListener()
+        addToCart("Test", productName, qty, desc, price, cty, productId)
     }
 
     private fun goBackHomePage(){
@@ -104,6 +107,30 @@ class IndividualProduct : AppCompatActivity() {
         btn.setOnClickListener{
             val it = Intent(this, MainActivity::class.java)
             startActivity(it)
+        }
+    }
+
+    private fun addQtyListener(){
+//        val qtyBtn = findViewById<Button>(R.id.quantityBtn)
+//        val submit = findViewById<Button>(R.id.submitBtn)
+//        submit.setOnClickListener{
+//            Toast.makeText(this, qtyBtn.text, Toast.LENGTH_SHORT).show()
+//        }
+        val abutton = findViewById<View>(R.id.quantityBtn) as ElegantNumberButton
+        abutton.setOnClickListener(ElegantNumberButton.OnClickListener { qty = abutton.number })
+
+    }
+
+    private fun addToCart(category: String, productname: String, quantity: String, description: String, price: Float, country: String, productid: Int){
+        val submit = findViewById<Button>(R.id.submitBtn)
+        submit.setOnClickListener{
+            val value = qty.toInt()
+            if(value == 0){
+                Toast.makeText(this, "Please specify at least 1 quantity!", Toast.LENGTH_SHORT).show()
+            }else{
+                var currentProduct = Product(category,productname,quantity,description,price,country,productid)
+                addItem(CartItem(currentProduct,value))
+            }
         }
     }
 }
