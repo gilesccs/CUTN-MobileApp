@@ -95,7 +95,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
 
     fun replaceVoucher(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
-        val savedCode = sharedPreferences.getString("discountCode","")
+        val savedCode = sharedPreferences.getString("discountCode","DEFAB32")
 
         if (savedCode != null) {
             Log.i("test",savedCode)
