@@ -65,10 +65,12 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     implementation 'com.github.armcha:ElasticView:0.2.0'
-
+    implementation 'com.eldersoss:elderssearchview:1.0.0'
+    
     // For reactive
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
     apply plugin: 'kotlin-android-extensions'
+
 }

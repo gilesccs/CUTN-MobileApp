@@ -51,9 +51,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         if (requestCode == SPEECH_CODE) {
             Log.i("test", "yup")
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
+//            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
             Log.i("test", "result is " + result?.get(0).toString())
-            searchBtn.setText(result?.get(0).toString())
+//            searchBtn.setText(result?.get(0).toString())
+            Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
