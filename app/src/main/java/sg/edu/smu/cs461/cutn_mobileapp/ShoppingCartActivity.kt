@@ -1,12 +1,15 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_shopping_cart.*
 import sg.edu.smu.cs461.cutn_mobileapp.R
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart
@@ -56,5 +59,10 @@ class ShoppingCartActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item!!)
+    }
+
+    fun checkout(view: View) {
+        Paper.book().destroy();
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }
