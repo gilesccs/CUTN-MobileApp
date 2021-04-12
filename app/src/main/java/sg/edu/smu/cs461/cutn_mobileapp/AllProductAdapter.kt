@@ -72,25 +72,15 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
                     val item = CartItem(product)
 
                     ShoppingCart.addItem(item)
+
                     //notify users
                     MotionToast.darkToast(itemView.context as Activity,
                         "Added to cart",
                         "${product.productname} added!",
                         MotionToast.TOAST_SUCCESS,
                         MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
+                        MotionToast.SHORT_DURATION,
                         ResourcesCompat.getFont(context,R.font.helvetica_regular))
-//                Snackbar.make(
-//                    (itemView.context as MainActivity).coordinator,
-//                    "${product.name} added to your cart",
-//                    Snackbar.LENGTH_LONG
-//                ).show()
-//                Toast.makeText(
-//                    this.context,
-//                    product.productname + " added to your cart",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                Snac
                     Log.i("item", "Added to cart: ${product.productname}")
                     it.onNext(ShoppingCart.getCart())
 

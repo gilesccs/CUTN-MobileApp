@@ -58,7 +58,6 @@
 
         </LinearLayout>
 
-
         <TextView
             android:textStyle="bold"
             android:layout_marginEnd="12dp"
@@ -70,7 +69,18 @@
             android:id="@+id/product_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"/>
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"/>
+
+            <ImageButton
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_remove_shopping_cart"
+                android:background="@color/colorAccent"
+                android:tint="@android:color/white"
+                android:id="@+id/removeItemBtn"
+                />
 
     </LinearLayout>
 
