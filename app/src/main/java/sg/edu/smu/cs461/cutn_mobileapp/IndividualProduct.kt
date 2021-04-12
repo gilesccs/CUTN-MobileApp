@@ -108,8 +108,7 @@ class IndividualProduct : AppCompatActivity() {
     private fun goBackHomePage(){
         val btn = findViewById<Button>(R.id.goBack)
         btn.setOnClickListener{
-            val it = Intent(this, MainActivity::class.java)
-            startActivity(it)
+            finish()
         }
     }
 

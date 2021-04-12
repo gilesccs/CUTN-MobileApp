@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -86,13 +87,13 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         val clickedItem: ClassifierModel = classifierList[position]
 
         val it = Intent(this, IndividualProduct::class.java)
-        it.putExtra("Product id", clickedItem.productid)
-        it.putExtra("Product Name", clickedItem.productname)
+        it.putExtra("ProductId", clickedItem.productid)
+        it.putExtra("ProductName", clickedItem.productname)
         it.putExtra("Description", clickedItem.description)
         it.putExtra("Price", clickedItem.price)
         it.putExtra("Quantity", clickedItem.quantity)
         it.putExtra("Country", clickedItem.country)
-        startActivityForResult(it, 4321)
+        startActivity(it)
 
         adapter.notifyItemChanged(position)
     }
@@ -140,6 +141,10 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         classifierLabel.setText("Our SmartGrocery Assistant has detected $label. Check out what we have in stock below!")
     }
 
+    fun goToShoppingCart(view: View) {
+        val intent = Intent(this, ShoppingCartActivity::class.java)
+        startActivity(intent)
+    }
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //        var label = data?.getStringExtra("label").toString()
