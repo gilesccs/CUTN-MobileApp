@@ -129,7 +129,16 @@ class IndividualProduct : AppCompatActivity() {
             val value = qty.toInt()
             if(value == 0){
                 Log.i("test","reachedHERE!")
-                Toast.makeText(this, "Please specify at least 1 quantity!", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Please specify at least 1 quantity!", Toast.LENGTH_SHORT).show()
+                MotionToast.createColorToast(
+                    this,
+                    "Error!",
+                    "Please specify at least 1 item!",
+                    MotionToast.TOAST_ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                )
             }else{
 //                Log.i("test", value.toString())
                 var currentProduct = Product(category,productname,quantity,description,price,country,productid)

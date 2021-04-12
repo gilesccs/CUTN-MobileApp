@@ -67,7 +67,7 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
 
             override fun afterTextChanged(s: Editable) {
                 if (s.length == 8) {
-                    if (s.substring(2, 3) != "e") {
+                    if (s.substring(2, 3).toLowerCase() != "e") {
                         MotionToast.darkToast(
                             this@ShoppingCartActivity, "Voucher invalid!", "You have entered an invalid voucher!",
                             MotionToast.TOAST_ERROR,
