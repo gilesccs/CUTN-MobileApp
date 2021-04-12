@@ -28,7 +28,7 @@ class AllProducts : AppCompatActivity() {
         setContentView(R.layout.activity_all_products)
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
 
         val cart_size = findViewById<TextView>(R.id.cart_size)
         cart_size.text = ShoppingCart.getShoppingCartSize().toString()

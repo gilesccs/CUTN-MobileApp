@@ -20,7 +20,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
 
-        setSupportActionBar(toolbar as Toolbar?)
+//        setSupportActionBar(toolbar as Toolbar?)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
