@@ -127,11 +127,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         val list2 = ArrayList<PopularItem>()
         for (i in 0 until size){
             var j = i
-            val drawable = when (i%4){
+            val drawable = when (i%5){
                 0 -> R.drawable.r1
                 1 -> R.drawable.r2
                 2 -> R.drawable.r3
-                else -> R.drawable.r4
+                3 -> R.drawable.r4
+                else -> R.drawable.r5
             }
 
             val item = PopularItem(drawable,list.get(j).productid,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity,list.get(j).country)
