@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener, CategoryAdapter.OnItemClickListener {
     private var REQ_CODE = 3213
     private lateinit var gotoRewards: ImageView
     private var SPEECH_CODE = 1999
@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val micBtn = findViewById<ImageButton>(R.id.microphone)
-//        micBtn?.setOnClickListener{
-//            voiceInput()
-//        }
+        val micBtn = findViewById<ImageButton>(R.id.microphone)
+        micBtn?.setOnClickListener{
+            voiceInput()
+        }
         individualPage()
 
         val productList = generateDummyListForPopularItem(5)
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
         val categoryList = generateDummyListForCategory(4)
         val recyclerViewCategory = findViewById<RecyclerView>(R.id.recyclerViewCategory)
-        recyclerViewCategory.adapter = CategoryAdapter(categoryList)
+        recyclerViewCategory.adapter = CategoryAdapter(categoryList, this)
         recyclerViewCategory.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerViewCategory.setHasFixedSize(true)
     }
@@ -51,9 +51,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         if (requestCode == SPEECH_CODE) {
             Log.i("test", "yup")
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
+//            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
             Log.i("test", "result is " + result?.get(0).toString())
-            searchBtn.setText(result?.get(0).toString())
+//            searchBtn.setText(result?.get(0).toString())
+            Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -71,8 +72,22 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         it.putExtra("Country", clickedItem.country)
         startActivityForResult(it, 4321)
 
-        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
-        clickedItem.productname = "Clicked"
+//        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
+//        clickedItem.productname = "Clicked"
+        adapter.notifyItemChanged(position)
+    }
+
+    override fun onItemClick2(position: Int) {
+        val categoryList = generateDummyListForCategory(4)
+        val adapter = CategoryAdapter(categoryList, this)
+        val clickedItem: Category = categoryList[position]
+
+        val it = Intent(this, AllProducts::class.java)
+        it.putExtra("category", clickedItem.category)
+        startActivity(it)
+
+//        Toast.makeText(this, "${clickedItem.category} clicked", Toast.LENGTH_SHORT).show()
+//        clickedItem.category = "Clicked"
         adapter.notifyItemChanged(position)
     }
 
@@ -124,6 +139,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         return list
     }
 
+    fun goToAllProducts(view: View) {
+        val intent = Intent(this, AllProducts::class.java)
+        startActivity(intent)
+        Log.i("TABLE CALLED","TEST")
+    }
+    
 
     private fun individualPage() {
         val rewardsBtn = findViewById<ImageButton>(R.id.photo)

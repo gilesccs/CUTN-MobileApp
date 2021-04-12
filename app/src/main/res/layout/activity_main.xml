@@ -17,7 +17,6 @@
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/cart"
         android:layout_width="wrap_content"
@@ -28,7 +27,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/rewards"
         app:layout_constraintEnd_toStartOf="@+id/rewards"
         app:layout_constraintTop_toTopOf="@+id/rewards"/>
-
     <ImageButton
         android:id="@+id/rewards"
         android:layout_width="wrap_content"
@@ -60,7 +58,6 @@
         app:esvElevation="@dimen/cardview_compat_inset_shadow"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.194"
-
         />
 
     <ImageButton
@@ -74,16 +71,16 @@
         app:layout_constraintEnd_toStartOf="@+id/cart"
         app:layout_constraintTop_toTopOf="@+id/cart"/>
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/microphone"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginRight="16dp"-->
-<!--        android:src="@drawable/microphone"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>-->
+    <ImageButton
+        android:id="@+id/microphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/microphone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
 
     <fragment
         android:id="@+id/categoryFragment"
@@ -94,6 +91,16 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All Product"
+        app:layout_constraintBottom_toTopOf="@+id/popularItems"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category"
+        android:onClick="goToAllProducts"/>
+        
     <fragment
         android:id="@+id/popularItemsFragment"
         android:name="sg.edu.smu.cs461.cutn_mobileapp.popularitemsFragment"

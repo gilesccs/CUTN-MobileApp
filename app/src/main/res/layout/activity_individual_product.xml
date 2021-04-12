@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IndividualProduct"
-    android:background="@drawable/softbg">
+    android:background="@drawable/softbg"
+    tools:context=".IndividualProduct">
 
     <Button
         android:id="@+id/goBack"
@@ -13,19 +13,17 @@
         android:layout_height="35dp"
         android:background="@drawable/ic_baseline_arrow_back_ios_24"
         android:layout_margin="10dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentTop="true" />
 
     <Button
         android:id="@+id/goCart"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/cart"
-        android:layout_margin="10dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        />
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/cart" />
 
 
     <TextView
@@ -55,38 +53,40 @@
         android:text="From Aomori, Japan"
         android:textColor="#49A14C"
         android:textSize="18sp" />
+
     <io.armcha.elasticview.ElasticView
         android:id="@+id/elasticViewImage"
-        app:flexibility="7"
         android:layout_width="350dp"
         android:layout_height="280dp"
+        android:layout_below="@+id/productNameLabel"
+        android:layout_centerInParent="true"
         android:layout_marginTop="25dp"
-        android:layout_below="@+id/productNameLabel"
-        android:layout_centerInParent="true"
+        app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:cardCornerRadius="10dp">
-    <ImageView
-        android:id="@+id/productImageLabel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/productNameLabel"
-        android:layout_centerInParent="true"
-        android:src="@drawable/r4"
-        android:gravity="center"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:flexibility="7">
+
+        <ImageView
+            android:id="@+id/productImageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/productNameLabel"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/r4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </io.armcha.elasticview.ElasticView>
+
     <TextView
         android:id="@+id/productPriceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/elasticViewImage"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="9dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="9dp"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:includeFontPadding="false"
@@ -112,25 +112,25 @@
         android:id="@+id/quantityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerVertical="true"
         android:layout_below="@id/elasticViewImage"
-
-        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="200dp"
-        app:textSize="10sp"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        app:backGroundColor="#dbd0bf"
         app:textColor="@color/black"
-        app:backGroundColor="#dbd0bf"/>
+        app:textSize="10sp" />
 
     <TextView
         android:id="@+id/packSizeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceLabel"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="-10dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:layout_marginTop="-10dp"
-        android:layout_marginLeft="27dp"
         android:includeFontPadding="false"
         android:text="PACK SIZE:"
         android:textColor="#000000"
@@ -141,11 +141,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-10dp"
         android:layout_toRightOf="@+id/packSizeLabel"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:layout_marginTop="-10dp"
-        android:layout_marginLeft="10dp"
         android:includeFontPadding="false"
         android:text="5"
         android:textColor="#000000"
@@ -156,12 +156,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/packSizeLabel"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="Description: "
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="10dp"
         android:textColor="#60645A"
         android:textSize="15sp" />
 
@@ -170,13 +170,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/packSizeLabel"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/productDesc"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="juicy with tropical flavour"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
         android:textColor="#60645A"
         android:textSize="15sp" />
 
@@ -185,60 +185,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productDescLabel"
+        android:layout_marginLeft="27dp"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="Recommended Items"
-        android:layout_marginLeft="27dp"
         android:textColor="#000000"
         android:textSize="25sp" />
 
-        <LinearLayout
-            android:id="@+id/recommendationWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_below="@id/recommendationLabel"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            android:layout_marginBottom="65dp">
+    <LinearLayout
+        android:id="@+id/recommendationWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recommendationLabel"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="65dp"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="#E7E8E6"
             android:layout_marginRight="7dp"
-
             android:layout_weight="1"
-            app:cardElevation="5dp"
-            >
-            <ImageButton
-                android:id="@+id/recommendationImageOne"
+            app:cardBackgroundColor="#E7E8E6"
+            app:cardElevation="5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/r1"
-                android:background="@color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:paddingBottom="0px">
 
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/popularItems"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/popularItems"
-                android:scaleType="fitCenter">
+                <ImageButton
+                    android:id="@+id/recommendationImageOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/r1"
+                    app:layout_constraintBottom_toBottomOf="@+id/popularItems"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/popularItems">
 
-            </ImageButton>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Fuji Apple"
-                android:layout_marginTop="80dp"
-                android:textAlignment="center"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="#000000"
-                android:id="@+id/text1"/>
+                </ImageButton>
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Fuji Apple"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:paddingBottom="10px"
+                    android:textSize="18dp"/>
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -246,56 +255,66 @@
             android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="#E7E8E6"
+            android:layout_marginRight="7dp"
             android:layout_weight="1"
-            app:cardElevation="5dp"
-            android:layout_marginLeft="7dp"
-            >
-            <ImageButton
-                android:id="@+id/recommendationImageTwo"
+            app:cardBackgroundColor="#E7E8E6"
+            app:cardElevation="5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/r5"
-                android:background="@color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/popularItems"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/popularItems"
-                android:scaleType="fitCenter">
-            </ImageButton>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:textAlignment="center"
-                android:text="Banana"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="#000000"
-                android:id="@+id/text2"/>
+                android:orientation="vertical"
+                android:paddingBottom="0px">
+
+                <ImageButton
+                    android:id="@+id/recommendationImageTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/r5"
+                    app:layout_constraintBottom_toBottomOf="@+id/popularItems"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/popularItems">
+
+                </ImageButton>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Banana"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:paddingBottom="10px"
+                    android:textSize="18dp"/>
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
+    </LinearLayout>
 
     <com.skydoves.elasticviews.ElasticButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Cart"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/holo_red_light"
+        android:text="Add to Cart"
         android:textColor="@color/white"
         android:textSize="17sp"
         app:button_cornerRadius="4dp"
         app:button_duration="250"
         app:button_scale="0.87" />
-
-
 
 
 </RelativeLayout>
