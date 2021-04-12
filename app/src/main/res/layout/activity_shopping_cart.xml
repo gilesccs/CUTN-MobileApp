@@ -29,7 +29,9 @@
         android:id="@+id/shopping_cart_recyclerView"
         android:layout_margin="2dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingBottom="66dp"
+        />
 
 
     <RelativeLayout
