@@ -18,7 +18,6 @@
 
 
         <ImageView
-            android:layout_weight=".5"
             android:scaleType="fitXY"
             android:id="@+id/product_image"
             android:layout_width="170dp"
@@ -41,7 +40,10 @@
                 android:textColor="@android:color/black"
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:lines="2"
+                android:width="100dp"/>
 
 
             <TextView
