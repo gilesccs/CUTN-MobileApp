@@ -74,7 +74,7 @@
 
 
         <Button
-            android:textSize="19sp"
+            android:textSize="15sp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
