@@ -129,8 +129,25 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
     }
 
     fun checkout(view: View) {
+        if (ShoppingCart.getCart().size != 0) {
+        MotionToast.darkToast(
+            this@ShoppingCartActivity, "Items checked out!", "You have successfully checked out your cart.",
+            MotionToast.TOAST_SUCCESS,
+            MotionToast.GRAVITY_BOTTOM,
+            MotionToast.LONG_DURATION,
+            ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+        )
         Paper.book().destroy();
         startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            MotionToast.darkToast(
+                this@ShoppingCartActivity, "No items in cart!", "Please add more items before checking out.",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+            )
+        }
     }
 
     override fun onItemClick(item: CartItem, position: Int) {
