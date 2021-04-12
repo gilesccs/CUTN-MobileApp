@@ -122,7 +122,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         if(stepSensor == null) {
 
 //            Toast.makeText(this,"Pedometer might not work in your device!", Toast.LENGTH_LONG).show()
-            MotionToast.createToast(this,
+            MotionToast.createColorToast(this,
                 "",
                 "Pedometer might not work in your device!",
                 MotionToast.TOAST_INFO,
@@ -164,7 +164,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             val clipData = ClipData.newPlainText("text", textToCopy)
             clipboardManager.setPrimaryClip(clipData)
 //            Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_LONG).show()
-            MotionToast.createToast(this,
+            MotionToast.createColorToast(this,
                 "Copied!",
                 "Text copied to clipboard",
                 MotionToast.TOAST_INFO,
@@ -212,7 +212,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         val curr = findViewById<TextView>(R.id.currentStepsView)
         btn.setOnClickListener{
 //            Toast.makeText(this,"Hold this to reset your rewards! Make sure to copy the discount code",Toast.LENGTH_LONG).show()
-            MotionToast.createToast(this,
+            MotionToast.createColorToast(this,
                 "",
                 "Hold this to reset your rewards! Make sure to copy the discount code!",
                 MotionToast.TOAST_INFO,
