@@ -138,5 +138,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         ShoppingCart.removeItem(item, this)
         adapter.notifyDataSetChanged()
         Log.i("hello","REMOVED $item")
+        recreate()
     }
 }
