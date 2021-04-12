@@ -1,8 +1,10 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +36,16 @@ class AllProducts : AppCompatActivity() {
 
         val cart_size = findViewById<TextView>(R.id.cart_size)
         cart_size.text = ShoppingCart.getShoppingCartSize().toString()
+
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val upArrow = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material)
+        upArrow?.setColorFilter(
+            ContextCompat.getColor(this, R.color.colorPrimary),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         try {
             swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
@@ -109,6 +121,17 @@ class AllProducts : AppCompatActivity() {
         swipeRefreshLayout.isRefreshing = false
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+
+        return super.onOptionsItemSelected(item!!)
     }
 
 

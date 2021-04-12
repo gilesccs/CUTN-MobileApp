@@ -5,7 +5,8 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffffa">
+    android:background="#fffffa"
+    tools:context=".ShoppingCartActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
