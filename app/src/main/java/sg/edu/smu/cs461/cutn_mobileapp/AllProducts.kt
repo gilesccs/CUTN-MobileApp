@@ -82,6 +82,10 @@ class AllProducts : AppCompatActivity() {
         swipeRefreshLayout.isRefreshing = false
 //        products = response.body()!!
         val myDBHelper = MyDBHelper(this)
+
+        // GET FROM INTENT HERE
+//        val category = intent.getStringExtra("category")
+//        products = category?.let { myDBHelper.readByCategory(it) }!!
         products = myDBHelper.readByCategory("fruits")
 //
 //        products = listOf(
