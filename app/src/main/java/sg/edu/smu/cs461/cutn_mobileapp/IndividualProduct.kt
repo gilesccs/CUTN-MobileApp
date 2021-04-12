@@ -138,7 +138,7 @@ class IndividualProduct : AppCompatActivity() {
                     "",
                     "$value item(s) have been added to cart!",
                     MotionToast.TOAST_INFO,
-                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.GRAVITY_BOTTOM,
                     MotionToast.SHORT_DURATION,
                     ResourcesCompat.getFont(this,R.font.helvetica_regular))
             }

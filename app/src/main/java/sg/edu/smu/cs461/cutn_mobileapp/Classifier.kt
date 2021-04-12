@@ -12,10 +12,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.tensorflow.lite.support.image.TensorImage
 import sg.edu.smu.cs461.cutn_mobileapp.ml.GroceryModel
+import www.sanju.motiontoast.MotionToast
 import java.io.File
 
 class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
@@ -28,14 +30,24 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         supportActionBar?.hide()
         Log.i("img", "classifier just started!")
         goBackHomePage()
-        analyzeWithClassifier(this)
+        val product = intent.getStringExtra("product")
+        Log.i("xo", "product: " + product )
+        if (product == null) {
+            Log.i("xo", "1st")
+            analyzeWithClassifier(this)
+        } else {
+            setPlaceholderImage()
+            populateRecyclerCard(product)
+        }
     }
 
     private fun analyzeWithClassifier(ctx: Context) {
         val imgFile = File(getDir("groceryPhoto", MODE_APPEND).toString() + "/groceryItem.jpg")
         var bitmap: Bitmap? = null
+        var userImage = findViewById<ImageView>(R.id.userImage)
         if (imgFile.exists()) {
             bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            userImage.setImageBitmap(bitmap)
         }
 
         val groceryModel = GroceryModel.newInstance(ctx)
@@ -56,13 +68,19 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
 
         // Releases model resources if no longer used.
         groceryModel.close()
-        var userImage = findViewById<ImageView>(R.id.userImage)
-        userImage.setImageBitmap(bitmap)
+
         setLabel(probability[0].label)
         Log.i("label", "what am i: "+probability[0].label.toString())
         this.labelTest = probability[0].label
         Log.i("testing",  this.labelTest!!)
         populateRecyclerCard(probability[0].label)
+    }
+
+    private fun setPlaceholderImage() {
+        Log.i("xo", "setplaceholderimg")
+        var userImage = findViewById<ImageView>(R.id.userImage)
+        userImage.setImageDrawable(getDrawable(R.drawable.no_image_foreground))
+
     }
 
     private fun populateRecyclerCard(label: String) {
@@ -101,6 +119,16 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
     private fun generateDummyListForClassifier(size: Int, itemIdentified: String): List<ClassifierModel>{
         val myDBHelper = MyDBHelper(this)
         val list = myDBHelper.readByMachineLearning(itemIdentified)
+        if (list.size == 0) {
+            MotionToast.createColorToast(this,
+                "Sorry!",
+                "No matching products found!!",
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.helvetica_regular))
+            return emptyList()
+        }
         val list2 = ArrayList<Product>()
         val list3 = ArrayList<ClassifierModel>()
 

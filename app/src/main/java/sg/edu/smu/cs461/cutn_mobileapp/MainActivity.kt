@@ -22,7 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import org.tensorflow.lite.support.image.TensorImage
 import sg.edu.smu.cs461.cutn_mobileapp.ml.GroceryModel
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
+import com.eldersoss.elderssearchview.EldersSearchView
 import io.paperdb.Paper
+import www.sanju.motiontoast.MotionToast
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -43,8 +46,15 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         micBtn?.setOnClickListener{
             voiceInput()
         }
+<<<<<<< Updated upstream
 
         supportActionBar?.hide()
+=======
+        val searchBarBtn = findViewById<ImageButton>(R.id.searchBtn)
+        searchBarBtn.setOnClickListener{
+            searchFromText()
+        }
+>>>>>>> Stashed changes
 //        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
@@ -61,6 +71,23 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
         // For shopping cart
         Paper.init(this)
+    }
+
+    private fun searchFromText() {
+        val searchBar = findViewById<EditText>(R.id.searchForProductET)
+        val userText = searchBar.text.toString()
+        if (userText == "") {
+            // TOAST HERE
+            MotionToast.createColorToast(this,
+                "",
+                "Please input a product!",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.helvetica_regular))
+        } else {
+            startClassifierWithText(userText)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -259,6 +286,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
     private fun startClassifier() {
         val it = Intent(this, Classifier::class.java)
+        startActivity(it)
+    }
+
+    private fun startClassifierWithText(product:String) {
+        val it = Intent(this, AllProducts::class.java)
+        it.putExtra("product", product)
         startActivity(it)
     }
 

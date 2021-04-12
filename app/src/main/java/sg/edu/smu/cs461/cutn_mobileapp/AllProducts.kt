@@ -10,11 +10,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_all_products.*
+import www.sanju.motiontoast.MotionToast
 import java.util.concurrent.TimeUnit
 
 
@@ -100,12 +102,33 @@ class AllProducts : AppCompatActivity() {
         // GET FROM INTENT HERE
         if (category == "") {
             category = intent.getStringExtra("category")?.toLowerCase().toString()
+<<<<<<< Updated upstream
             val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
             toolbar.title = category.capitalize()
         }
         Log.i("category", category.toString())
         products = category?.let { myDBHelper.readByCategory(it) }!!
 
+=======
+            products = category?.let { myDBHelper.readByCategory(it) }!!
+        } else {
+            val keyword = intent.getStringExtra("product")
+            if (keyword != null) {
+                products = myDBHelper.readByMachineLearning(keyword)
+                if (products.size == 0) {
+                    MotionToast.createColorToast(this,
+                        "Sorry!",
+                        "No matching products found!",
+                        MotionToast.TOAST_WARNING,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this,R.font.helvetica_regular))
+                    return
+                }
+            }
+        }
+        Log.i("category", category.toString())
+>>>>>>> Stashed changes
         Log.i("products", products.toString())
 
 //        products = myDBHelper.readByCategory("fruits")
