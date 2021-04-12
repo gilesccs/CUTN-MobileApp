@@ -21,11 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.tensorflow.lite.support.image.TensorImage
 import sg.edu.smu.cs461.cutn_mobileapp.ml.GroceryModel
-
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import io.paperdb.Paper
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,7 +38,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         micBtn?.setOnClickListener{
             voiceInput()
         }
-        individualPage()
+//        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
         val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
@@ -70,6 +66,27 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             Log.i("test", "result is " + result?.get(0).toString())
 //            searchBtn.setText(result?.get(0).toString())
             Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
+        } else {
+
+            Log.i("img", "0" + data.toString())
+
+            var pic = data?.getParcelableExtra<Bitmap>("data")
+
+//            profileImage.layoutParams.height = 600;
+//            profileImage.requestLayout();
+            if (pic === null) {
+                val selectedImage: Uri? = data?.data
+//                profileImage.setImageURI(selectedImage)
+                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
+                Log.i("img", "1" + bitmap.toString())
+//                val uri = saveImageToInternalStorage(bitmap)
+            } else {
+                Log.i("img", "2" + pic.toString())
+                analyzeWithClassifier(this, pic)
+
+//                profileImage.setImageBitmap(Bitmap.createScaledBitmap(pic, 500, 600, false));
+//                storeImage(pic)
+            }
         }
     }
 
@@ -161,13 +178,13 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     }
     
 
-    private fun individualPage() {
-        val rewardsBtn = findViewById<ImageButton>(R.id.photo)
-        rewardsBtn?.setOnClickListener{
-            val it = Intent(this, IndividualProduct::class.java)
-            startActivityForResult(it, 4321)
-        }
-    }
+//    private fun individualPage() {
+//        val rewardsBtn = findViewById<ImageButton>(R.id.photo)
+//        rewardsBtn?.setOnClickListener{
+//            val it = Intent(this, IndividualProduct::class.java)
+//            startActivityForResult(it, 4321)
+//        }
+//    }
 
     fun launchCameraForClassifier(view: View) {
         val pickImageFileIntent = Intent()
@@ -188,32 +205,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             )
         )
         startActivityForResult(chooserIntent, REQ_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
-//        val profileImage = findViewById<ImageView>(R.id.profileImage)
-        if (requestCode === REQ_CODE) {
-            Log.i("img", "0" + imageReturnedIntent.toString())
-
-            var pic = imageReturnedIntent?.getParcelableExtra<Bitmap>("data")
-
-//            profileImage.layoutParams.height = 600;
-//            profileImage.requestLayout();
-            if (pic === null) {
-                val selectedImage: Uri? = imageReturnedIntent?.data
-//                profileImage.setImageURI(selectedImage)
-                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
-                Log.i("img", "1" + bitmap.toString())
-//                val uri = saveImageToInternalStorage(bitmap)
-            } else {
-                Log.i("img", "2" + pic.toString())
-                analyzeWithClassifier(this, pic)
-
-//                profileImage.setImageBitmap(Bitmap.createScaledBitmap(pic, 500, 600, false));
-//                storeImage(pic)
-            }
-        }
     }
 
     private fun analyzeWithClassifier(ctx: Context, bitmap: Bitmap) {
@@ -241,10 +232,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         it.putExtra("label", probability[0].label)
 //        profileImage.setImageBitmap(Bitmap.createScaledBitmap(pic, 500, 600, false));
         it.putExtra("imgBitmap", Bitmap.createScaledBitmap(bitmap, 300, 300, false))
-        startActivityForResult(it, 123)
+        startActivity(it)
 
     }
-    
+
     private fun voiceInput() {
         if(!SpeechRecognizer.isRecognitionAvailable(this)){
             Toast.makeText(this, "Speech Recognition is not available on this device!", Toast.LENGTH_SHORT).show()
