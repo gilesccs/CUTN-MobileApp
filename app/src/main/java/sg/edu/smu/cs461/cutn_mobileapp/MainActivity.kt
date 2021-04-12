@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener, CategoryAdapter.OnItemClickListener {
     private var REQ_CODE = 3213
     private lateinit var gotoRewards: ImageView
     private var SPEECH_CODE = 1999
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
         val categoryList = generateDummyListForCategory(4)
         val recyclerViewCategory = findViewById<RecyclerView>(R.id.recyclerViewCategory)
-        recyclerViewCategory.adapter = CategoryAdapter(categoryList)
+        recyclerViewCategory.adapter = CategoryAdapter(categoryList, this)
         recyclerViewCategory.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerViewCategory.setHasFixedSize(true)
     }
@@ -71,8 +71,22 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         it.putExtra("Country", clickedItem.country)
         startActivityForResult(it, 4321)
 
-        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
-        clickedItem.productname = "Clicked"
+//        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
+//        clickedItem.productname = "Clicked"
+        adapter.notifyItemChanged(position)
+    }
+
+    override fun onItemClick2(position: Int) {
+        val categoryList = generateDummyListForCategory(4)
+        val adapter = CategoryAdapter(categoryList, this)
+        val clickedItem: Category = categoryList[position]
+
+        val it = Intent(this, AllProducts::class.java)
+        it.putExtra("category", clickedItem.category)
+        startActivity(it)
+
+//        Toast.makeText(this, "${clickedItem.category} clicked", Toast.LENGTH_SHORT).show()
+//        clickedItem.category = "Clicked"
         adapter.notifyItemChanged(position)
     }
 
