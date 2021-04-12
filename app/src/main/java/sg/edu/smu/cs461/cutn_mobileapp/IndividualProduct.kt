@@ -2,16 +2,19 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart.Companion.addItem
+import www.sanju.motiontoast.MotionToast
 import java.text.DecimalFormat
 
 
 class IndividualProduct : AppCompatActivity() {
-    var qty = ""
+    var qty = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,11 +129,25 @@ class IndividualProduct : AppCompatActivity() {
         submit.setOnClickListener{
             val value = qty.toInt()
             if(value == 0){
+                Log.i("test","reachedHERE!")
                 Toast.makeText(this, "Please specify at least 1 quantity!", Toast.LENGTH_SHORT).show()
             }else{
+//                Log.i("test", value.toString())
                 var currentProduct = Product(category,productname,quantity,description,price,country,productid)
-                addItem(CartItem(currentProduct,value))
+                addItem(CartItem(currentProduct,(value-1)))
+                MotionToast.createColorToast(this,
+                    "",
+                    "$value item(s) have been added to cart!",
+                    MotionToast.TOAST_INFO,
+                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.SHORT_DURATION,
+                    ResourcesCompat.getFont(this,R.font.helvetica_regular))
             }
         }
+    }
+
+    fun goToShoppingCart(view: View) {
+        val intent = Intent(this, ShoppingCartActivity::class.java)
+        startActivity(intent)
     }
 }
