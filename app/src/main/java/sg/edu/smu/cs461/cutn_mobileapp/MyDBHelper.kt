@@ -74,7 +74,7 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
     fun readByCategory(cate:String): MutableList<Product>{
         var list : MutableList<Product> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from Products where category = $cate"
+        val query = "Select * from Products where category = '$cate'"
         val result = db.rawQuery(query,null)
         if(result.moveToFirst()){
             do{

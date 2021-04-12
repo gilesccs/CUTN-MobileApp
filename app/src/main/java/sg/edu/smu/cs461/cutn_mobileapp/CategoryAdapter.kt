@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter (private val productList: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(){
+class CategoryAdapter (private val productList: List<Category>, private val listener2: OnItemClickListener) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         var categoryView = LayoutInflater.from(parent.context).inflate(R.layout.category_layout, parent, false)
         return CategoryViewHolder(categoryView)
@@ -20,13 +20,13 @@ class CategoryAdapter (private val productList: List<Category>) : RecyclerView.A
         holder.categoryName.text = currentProduct.category
         holder.imageViewCategory.setImageResource(currentProduct.imageResource)
         if (position == 0){
-            holder.cardView.setCardBackgroundColor(Color.rgb(240,143,143))
+            holder.cardView.setCardBackgroundColor(Color.rgb(235,159,159))
         } else if (position == 1){
-            holder.cardView.setCardBackgroundColor(Color.rgb(153,255,102))
+            holder.cardView.setCardBackgroundColor(Color.rgb(159,235,174))
         } else if (position == 2){
-            holder.cardView.setCardBackgroundColor(Color.rgb(245,245,245))
+            holder.cardView.setCardBackgroundColor(Color.rgb(159,177,235))
         } else {
-            holder.cardView.setCardBackgroundColor(Color.rgb(255,255,102))
+            holder.cardView.setCardBackgroundColor(Color.rgb(235,215,159))
         }
     }
 
@@ -34,9 +34,24 @@ class CategoryAdapter (private val productList: List<Category>) : RecyclerView.A
         return productList.size
     }
 
-    class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView) {
+    inner class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView), View.OnClickListener {
         val imageViewCategory: ImageView = categoryView.findViewById(R.id.imageViewCategory)
         val categoryName: TextView = categoryView.findViewById(R.id.categoryName)
         val cardView: CardView = categoryView.findViewById(R.id.cardView)
+
+        init {
+            categoryView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener2.onItemClick2(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick2(position: Int)
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Rewards">
+    tools:context=".Rewards"
+    android:background="@drawable/softbg">
 
     <nl.dionsegijn.konfetti.KonfettiView
         android:id="@+id/viewKonfetti"
