@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -31,7 +32,6 @@ class AllProducts : AppCompatActivity() {
 //        Paper.init(this)
         setContentView(R.layout.activity_all_products)
 
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
 //        setSupportActionBar(toolbar)
 
         val cart_size = findViewById<TextView>(R.id.cart_size)
@@ -100,10 +100,14 @@ class AllProducts : AppCompatActivity() {
         // GET FROM INTENT HERE
         if (category == "") {
             category = intent.getStringExtra("category")?.toLowerCase().toString()
+            val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+            toolbar.title = category.capitalize()
         }
         Log.i("category", category.toString())
         products = category?.let { myDBHelper.readByCategory(it) }!!
+
         Log.i("products", products.toString())
+
 //        products = myDBHelper.readByCategory("fruits")
 //
 //        products = listOf(
