@@ -84,9 +84,11 @@ class AllProducts : AppCompatActivity() {
         val myDBHelper = MyDBHelper(this)
 
         // GET FROM INTENT HERE
-//        val category = intent.getStringExtra("category")
-//        products = category?.let { myDBHelper.readByCategory(it) }!!
-        products = myDBHelper.readByCategory("fruits")
+        val category = intent.getStringExtra("category")?.toLowerCase()
+        Log.i("category",category.toString())
+        products = category?.let { myDBHelper.readByCategory(it) }!!
+        Log.i("products", products.toString())
+//        products = myDBHelper.readByCategory("fruits")
 //
 //        products = listOf(
 //            Product("name", "1", "description", 4.0f, "Singapore"),

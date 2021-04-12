@@ -15,9 +15,7 @@
         android:layout_margin="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+         />
 
     <Button
         android:id="@+id/goCart"
