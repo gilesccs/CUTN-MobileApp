@@ -42,6 +42,7 @@ class AllProducts : AppCompatActivity() {
                 )
             )
             swipeRefreshLayout.isRefreshing = true
+            swipeRefreshLayout.setOnRefreshListener { getProducts() }
 
         } catch (e: Exception) {
             Log.i("ERROR", e.toString())
@@ -56,23 +57,21 @@ class AllProducts : AppCompatActivity() {
 
                 getProducts()
                 showCart.setOnClickListener {
-                    Log.i("cart","Button pressed!")
+                    Log.i("cart", "Button pressed!")
                     startActivity(Intent(this, ShoppingCartActivity::class.java))
                 }
 
             }
 
         } catch (e: Exception) {
-            Log.i("ERROR",e.toString())
+            Log.i("ERROR", e.toString())
         }
-
-
 
 
     }
 
-    fun goToShoppingCart(view: View){
-        Log.i("cart","Button pressed!")
+    fun goToShoppingCart(view: View) {
+        Log.i("cart", "Button pressed!")
         startActivity(Intent(this, ShoppingCartActivity::class.java))
     }
 
@@ -85,7 +84,7 @@ class AllProducts : AppCompatActivity() {
 
         // GET FROM INTENT HERE
         val category = intent.getStringExtra("category")?.toLowerCase()
-        Log.i("category",category.toString())
+        Log.i("category", category.toString())
         products = category?.let { myDBHelper.readByCategory(it) }!!
         Log.i("products", products.toString())
 //        products = myDBHelper.readByCategory("fruits")

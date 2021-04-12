@@ -23,7 +23,7 @@ class ShoppingCart {
 
             val targetItem = cart.singleOrNull { it.product.productid == cartItem.product.productid }
             if (targetItem != null) {
-                if (targetItem.quantity > 0) {
+                if (targetItem.quantity > 1) {
                     targetItem.quantity--
                 } else {
                     cart.remove(targetItem)
