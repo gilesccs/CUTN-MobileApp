@@ -88,16 +88,13 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         val clickedItem: PopularItem = productList[position]
 
         val it = Intent(this, IndividualProduct::class.java)
-        it.putExtra("Product id", clickedItem.productid)
-        it.putExtra("Product Name", clickedItem.productname)
+        it.putExtra("ProductId", clickedItem.productid)
+        it.putExtra("ProductName", clickedItem.productname)
         it.putExtra("Description", clickedItem.description)
         it.putExtra("Price", clickedItem.price)
         it.putExtra("Quantity", clickedItem.quantity)
         it.putExtra("Country", clickedItem.country)
-        startActivityForResult(it, 4321)
-
-//        Toast.makeText(this, "${clickedItem.productname} clicked", Toast.LENGTH_SHORT).show()
-//        clickedItem.productname = "Clicked"
+        startActivity(it)
         adapter.notifyItemChanged(position)
     }
 
