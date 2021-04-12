@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.tensorflow.lite.support.image.TensorImage
 import sg.edu.smu.cs461.cutn_mobileapp.ml.GroceryModel
 import android.widget.Toast
+import io.paperdb.Paper
 import java.util.*
 import kotlin.collections.ArrayList
 
