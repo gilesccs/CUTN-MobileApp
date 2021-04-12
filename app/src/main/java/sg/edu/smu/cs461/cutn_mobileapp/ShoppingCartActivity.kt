@@ -6,14 +6,17 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.paperdb.Paper
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_shopping_cart.*
 import sg.edu.smu.cs461.cutn_mobileapp.R
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart
@@ -22,7 +25,7 @@ import www.sanju.motiontoast.MotionToast
 import java.text.DecimalFormat
 import kotlin.properties.Delegates
 
-class ShoppingCartActivity : AppCompatActivity() {
+class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
 
     lateinit var adapter: ShoppingCartAdapter
     var isVoucherApplied = false
@@ -43,7 +46,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         )
         supportActionBar?.setHomeAsUpIndicator(upArrow)
 
-        adapter = ShoppingCartAdapter(this, ShoppingCart.getCart())
+        adapter = ShoppingCartAdapter(this, ShoppingCart.getCart(),this)
         adapter.notifyDataSetChanged()
 
         shopping_cart_recyclerView.adapter = adapter
@@ -128,5 +131,12 @@ class ShoppingCartActivity : AppCompatActivity() {
     fun checkout(view: View) {
         Paper.book().destroy();
         startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    override fun onItemClick(item: CartItem, position: Int) {
+        Toast.makeText(this, "Removed!", Toast.LENGTH_SHORT)
+        ShoppingCart.removeItem(item, this)
+        adapter.notifyDataSetChanged()
+        Log.i("hello","REMOVED $item")
     }
 }
