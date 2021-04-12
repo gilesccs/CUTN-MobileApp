@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.cart_list_item.view.*
+import java.text.DecimalFormat
 import kotlin.properties.Delegates
 
 class ShoppingCartAdapter(var context: Context, var cartItems: List<CartItem>) :
@@ -50,7 +51,9 @@ class ShoppingCartAdapter(var context: Context, var cartItems: List<CartItem>) :
 //            itemView.product_image.setImageResource(getResources().getIdentifier(variableValue, "drawable", getPackageName()))
             itemView.product_name.text = cartItem.product.productname
 
-            itemView.product_price.text = "$${cartItem.product.price}"
+            val dec = DecimalFormat("##0.00")
+            val totalPriceString = dec.format(cartItem.product.price)
+            itemView.product_price.text = "$${totalPriceString}"
 
             itemView.product_quantity.text = cartItem.quantity.toString()
 

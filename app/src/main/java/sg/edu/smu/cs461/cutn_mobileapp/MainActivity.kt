@@ -251,6 +251,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     }
 
     fun goToShoppingCart(view: View) {
+
         val intent = Intent(this, ShoppingCartActivity::class.java)
         startActivity(intent)
     }
