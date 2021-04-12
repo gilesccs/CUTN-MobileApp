@@ -16,11 +16,8 @@ class IndividualProduct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_individual_product)
         var productId = intent.getIntExtra("ProductId",1)
-        Log.i("details","test1")
         var productName = intent.getStringExtra("ProductName") as String
-        Log.i("details","test2")
         var desc = intent.getStringExtra("Description") as String
-        Log.i("details","test3")
         var price = intent.getFloatExtra("Price",0F)
         var qty = intent.getStringExtra("Quantity") as String
         var cty = intent.getStringExtra("Country") as String
@@ -72,13 +69,33 @@ class IndividualProduct : AppCompatActivity() {
         var firstName = findViewById<TextView>(R.id.text1)
         firstName.text = newList[0].productname
 
+        firstProduct?.setOnClickListener{
+            val it = Intent(this, IndividualProduct::class.java)
+            it.putExtra("ProductId", newList[0].productid)
+            it.putExtra("ProductName", newList[0].productname)
+            it.putExtra("Description", newList[0].description)
+            it.putExtra("Price", newList[0].price)
+            it.putExtra("Quantity", newList[0].quantity)
+            it.putExtra("Country", newList[0].country)
+            startActivity(it)
+        }
+
         var secondProduct = findViewById<ImageButton>(R.id.recommendationImageTwo)
         var secondID = newList[1].productid
         var secondResource = this.resources.getIdentifier("r$secondID", "drawable",this.packageName)
         secondProduct.setImageResource(secondResource)
         var secondName = findViewById<TextView>(R.id.text2)
         secondName.text = newList[1].productname
-
+        secondProduct?.setOnClickListener{
+            val it = Intent(this, IndividualProduct::class.java)
+            it.putExtra("ProductId", newList[1].productid)
+            it.putExtra("ProductName", newList[1].productname)
+            it.putExtra("Description", newList[1].description)
+            it.putExtra("Price", newList[1].price)
+            it.putExtra("Quantity", newList[1].quantity)
+            it.putExtra("Country", newList[1].country)
+            startActivity(it)
+        }
         goBackHomePage()
     }
 
