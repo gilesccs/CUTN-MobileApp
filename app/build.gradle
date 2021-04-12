@@ -51,4 +51,5 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     implementation 'com.github.armcha:ElasticView:0.2.0'
+    implementation 'com.eldersoss:elderssearchview:1.0.0'
 }

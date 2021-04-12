@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val micBtn = findViewById<ImageButton>(R.id.microphone)
-        micBtn?.setOnClickListener{
-            voiceInput()
-        }
+//        val micBtn = findViewById<ImageButton>(R.id.microphone)
+//        micBtn?.setOnClickListener{
+//            voiceInput()
+//        }
         individualPage()
 
         val productList = generateDummyListForPopularItem(5)

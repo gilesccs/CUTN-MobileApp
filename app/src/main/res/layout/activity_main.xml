@@ -6,17 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/softbg">
-
-    <TextView
+<!---->
+    <ImageView
         android:id="@+id/cutn"
         android:layout_width="wrap_content"
+        android:src="@drawable/logo"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="4dp"
-        android:text="CUTN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,15 +40,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cutn"/>
 
-    <EditText
+    <!--    <EditText-->
+<!--        android:id="@+id/searchForProduct"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:hint="Search For Product"-->
+<!--        android:inputType="text"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:layout_editor_absoluteX="4dp" />-->
+
+    <com.eldersoss.elderssearchview.EldersSearchView
         android:id="@+id/searchForProduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:hint="Search For Product"
-        android:inputType="text"
+        android:layout_height="wrap_content"
+        app:esvSuggestionsEnabled="true"
+        app:esvAlwaysFilter="true"
+        app:esvHintText="Search For Product"
+        app:esvElevation="@dimen/cardview_compat_inset_shadow"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="4dp" />
+        app:layout_constraintVertical_bias="0.194"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/photo"
@@ -59,20 +70,20 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/photo"
-        app:layout_constraintBottom_toBottomOf="@+id/microphone"
-        app:layout_constraintEnd_toStartOf="@+id/microphone"
-        app:layout_constraintTop_toTopOf="@+id/microphone"/>
+        app:layout_constraintBottom_toBottomOf="@+id/cart"
+        app:layout_constraintEnd_toStartOf="@+id/cart"
+        app:layout_constraintTop_toTopOf="@+id/cart"/>
 
-    <ImageButton
-        android:id="@+id/microphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/microphone"
-        app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>
+<!--    <ImageButton-->
+<!--        android:id="@+id/microphone"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:src="@drawable/microphone"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/searchForProduct"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/searchForProduct"/>-->
 
     <fragment
         android:id="@+id/categoryFragment"
@@ -84,10 +95,11 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/popularItemsFragment"
         android:name="sg.edu.smu.cs461.cutn_mobileapp.popularitemsFragment"
-        tools:layout="@layout/fragment_popularitems"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryFragment"
+        tools:layout="@layout/fragment_popularitems" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
