@@ -78,7 +78,7 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
                         "${product.productname} added!",
                         MotionToast.TOAST_SUCCESS,
                         MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
+                        MotionToast.SHORT_DURATION,
                         ResourcesCompat.getFont(context,R.font.helvetica_regular))
 //                Snackbar.make(
 //                    (itemView.context as MainActivity).coordinator,
