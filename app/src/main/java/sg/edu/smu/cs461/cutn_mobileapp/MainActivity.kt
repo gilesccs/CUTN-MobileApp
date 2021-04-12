@@ -23,6 +23,10 @@ import org.tensorflow.lite.support.image.TensorImage
 import sg.edu.smu.cs461.cutn_mobileapp.ml.GroceryModel
 import android.widget.Toast
 import io.paperdb.Paper
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -68,25 +72,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 //            searchBtn.setText(result?.get(0).toString())
             Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
         } else {
-
-            Log.i("img", "0" + data.toString())
-
             var pic = data?.getParcelableExtra<Bitmap>("data")
-
-//            profileImage.layoutParams.height = 600;
-//            profileImage.requestLayout();
             if (pic === null) {
                 val selectedImage: Uri? = data?.data
-//                profileImage.setImageURI(selectedImage)
                 val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
-                Log.i("img", "1" + bitmap.toString())
-//                val uri = saveImageToInternalStorage(bitmap)
             } else {
-                Log.i("img", "2" + pic.toString())
-                analyzeWithClassifier(this, pic)
-
-//                profileImage.setImageBitmap(Bitmap.createScaledBitmap(pic, 500, 600, false));
-//                storeImage(pic)
+                storeImage(pic)
             }
         }
     }
@@ -149,7 +140,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     private fun generateDummyListForCategory(size: Int): List<Category>{
         val list = ArrayList<Category>()
         val categoryList = listOf("Fruits","Vegetables","Packages","Snack")
-
         for (i in 0 until size){
             var j = i
             val drawable = when (i%4){
@@ -158,11 +148,9 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
                 2 -> R.drawable.milk
                 else -> R.drawable.snacks
             }
-
             if (j > 3){
                 j = 0
             }
-
             val item = Category(drawable,categoryList.get(j))
             list += item
         }
@@ -175,7 +163,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         Log.i("TABLE CALLED","TEST")
     }
     
-
 //    private fun individualPage() {
 //        val rewardsBtn = findViewById<ImageButton>(R.id.photo)
 //        rewardsBtn?.setOnClickListener{
@@ -189,49 +176,19 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         while (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),111)
         }
-
         pickImageFileIntent.type = "image/*"
         pickImageFileIntent.action = Intent.ACTION_GET_CONTENT
-        val pickGalleryImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        val pickGalleryImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         val captureCameraImageIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val pickTitle = "Capture from camera or Select from gallery the Profile photo"
         val chooserIntent = Intent.createChooser(pickImageFileIntent, pickTitle)
         chooserIntent.putExtra(
             Intent.EXTRA_INITIAL_INTENTS, arrayOf(
                 captureCameraImageIntent,
-                pickGalleryImageIntent
+//                pickGalleryImageIntent
             )
         )
         startActivityForResult(chooserIntent, REQ_CODE)
-    }
-
-    private fun analyzeWithClassifier(ctx: Context, bitmap: Bitmap) {
-        val groceryModel = GroceryModel.newInstance(ctx)
-
-        // Creates inputs for reference.
-        val image = TensorImage.fromBitmap(bitmap)
-
-        // Runs model inference and gets result.
-        val outputs = groceryModel.process(image)
-        val probability = outputs
-            .probabilityAsCategoryList
-            .apply { sortByDescending { it.score } }
-            .take(1)
-
-        for (output in probability) {
-//            items.add( Recognition(output.label, output.score ))
-            Log.i("img", "label: "+output.label + " score: "+ output.score)
-        }
-
-        // Releases model resources if no longer used.
-        groceryModel.close()
-
-        val it = Intent(this, Classifier::class.java)
-        it.putExtra("label", probability[0].label)
-//        profileImage.setImageBitmap(Bitmap.createScaledBitmap(pic, 500, 600, false));
-        it.putExtra("imgBitmap", Bitmap.createScaledBitmap(bitmap, 300, 300, false))
-        startActivity(it)
-
     }
 
     private fun voiceInput() {
@@ -248,9 +205,58 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     }
 
     fun goToShoppingCart(view: View) {
-
         val intent = Intent(this, ShoppingCartActivity::class.java)
         startActivity(intent)
+    }
+
+    /** Create a File for saving an image or video  */
+    private fun getOutputMediaFile(): File? {
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+//        Log.i("dirPic", filesDir
+//                .toString() + "/Android/data/"
+//                + applicationContext.packageName
+//                + "/Files")
+        val mediaStorageDir = File(getDir("groceryPhoto", MODE_APPEND)
+            .toString())
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null
+            }
+        }
+        // Create a media file name
+        val mediaFile: File
+        val mImageName = "groceryItem.jpg"
+        mediaFile = File(mediaStorageDir.path + File.separator + mImageName)
+        return mediaFile
+    }
+
+    private fun storeImage(image: Bitmap) {
+        val pictureFile = getOutputMediaFile()
+        if (pictureFile == null) {
+            Log.d("TAG",
+                "Error creating media file, check storage permissions: ") // e.getMessage());
+            return
+        }
+        try {
+            val fos = FileOutputStream(pictureFile)
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos)
+            fos.close()
+            startClassifier()
+        } catch (e: FileNotFoundException) {
+            Log.d("TAG", "File not found: ")
+        } catch (e: IOException) {
+            Log.d("TAG", "Error accessing file: ")
+        }
+    }
+
+    private fun startClassifier() {
+        val it = Intent(this, Classifier::class.java)
+        startActivity(it)
     }
 
 

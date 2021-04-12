@@ -10,6 +10,16 @@ class Product{
     var country : String = ""
     var category: String = ""
 
+    constructor(category: String, productname: String, quantity: String, description: String, price: Float, country: String, productid: Int){
+        this.category = category
+        this.productname = productname
+        this.quantity = quantity
+        this.description = description
+        this.price = price
+        this.country = country
+        this.productid = productid
+    }
+
     constructor(category:String,productname:String,quantity:String,description:String,price:Float,country:String){
         this.category = category
         this.productname = productname

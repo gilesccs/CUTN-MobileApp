@@ -33,7 +33,7 @@
         app:flexibility="7"
         android:layout_centerHorizontal="true"
         android:layout_width="350dp"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:layout_marginTop="25dp"
         android:layout_below="@id/goCart"
         app:cardElevation="5dp"
@@ -71,7 +71,7 @@
         android:layout_height="match_parent"
         android:id="@+id/popularItemsFragment"
         android:name="sg.edu.smu.cs461.cutn_mobileapp.classifierFragment"
-        tools:layout="@layout/classifier_fragment"/>
+        tools:layout="@layout/fragment_classifier"/>
 
 
 
