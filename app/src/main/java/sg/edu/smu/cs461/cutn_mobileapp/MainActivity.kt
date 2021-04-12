@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         micBtn?.setOnClickListener{
             voiceInput()
         }
+
+        actionBar?.hide()
 //        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
