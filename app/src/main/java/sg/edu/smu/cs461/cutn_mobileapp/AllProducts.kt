@@ -103,18 +103,14 @@ class AllProducts : AppCompatActivity() {
         val category = intent.getStringExtra("category")
         val keyword = intent.getStringExtra("product")
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        Log.i("keyword", category.toString())
-        Log.i("keyword", keyword.toString())
 
         if (category != null) {
-            Log.i("keyword","why are you here")
             products = category.toString().toLowerCase().let { myDBHelper.readByCategory(it) }!!
             toolbar.title = category.toString().capitalize()
         }
         else if (keyword != null) {
-            Log.i("keyword","OI WTF")
-            toolbar.title = "Search results for \"" + keyword.toString().capitalize() + "\""
             products = myDBHelper.readByMachineLearning(keyword.toString())
+            toolbar.title = "${products.size} search result(s) for \"" + keyword.toString().capitalize() + "\""
             if (products.size == 0) {
                 MotionToast.createColorToast(
                     this,
