@@ -24,6 +24,7 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classifier)
+        supportActionBar?.hide()
         Log.i("img", "classifier just started!")
         goBackHomePage()
         analyzeWithClassifier(this)

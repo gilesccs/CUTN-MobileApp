@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             voiceInput()
         }
 
-        actionBar?.hide()
+        supportActionBar?.hide()
 //        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
