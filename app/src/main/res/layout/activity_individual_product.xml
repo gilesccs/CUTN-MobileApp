@@ -245,7 +245,12 @@
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:paddingBottom="10px"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp"
+                    android:autoSizeTextType="uniform"
+                    android:lines="1"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeMaxTextSize="16sp"
+                    android:autoSizeStepGranularity="2sp"/>
 
             </LinearLayout>
 
@@ -293,7 +298,12 @@
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:paddingBottom="10px"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp"
+                    android:autoSizeTextType="uniform"
+                    android:lines="1"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeMaxTextSize="16sp"
+                    android:autoSizeStepGranularity="2sp"/>
 
             </LinearLayout>
 
