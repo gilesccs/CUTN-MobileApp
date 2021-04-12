@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         recyclerViewCategory.adapter = CategoryAdapter(categoryList, this)
         recyclerViewCategory.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         recyclerViewCategory.setHasFixedSize(true)
+
+        // For shopping cart
+        Paper.init(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -244,6 +247,11 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             Log.i("test","reached")
             startActivityForResult(i,SPEECH_CODE)
         }
+    }
+
+    fun goToShoppingCart(view: View) {
+        val intent = Intent(this, ShoppingCartActivity::class.java)
+        startActivity(intent)
     }
 
 

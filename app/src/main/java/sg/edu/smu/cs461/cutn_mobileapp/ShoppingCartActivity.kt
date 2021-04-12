@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_shopping_cart.*
 import sg.edu.smu.cs461.cutn_mobileapp.R
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCartAdapter
+import java.text.DecimalFormat
 
 class ShoppingCartActivity : AppCompatActivity() {
 
@@ -39,8 +40,11 @@ class ShoppingCartActivity : AppCompatActivity() {
         var totalPrice = ShoppingCart.getCart()
             .fold(0.toDouble()) { acc, cartItem -> acc + cartItem.quantity.times(cartItem.product.price!!.toDouble()) }
 
-        totalPrice = String.format("%.2f", totalPrice).toDouble()
-        total_price.text = "$${totalPrice}"
+        val dec = DecimalFormat("##0.00")
+        val totalPriceString = dec.format(totalPrice)
+
+//        totalPrice = String.format("%.2f", totalPrice).toDouble()
+        total_price.text = "$${totalPriceString}"
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -24,7 +24,7 @@ class AllProducts : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Paper.init(this)
+//        Paper.init(this)
         setContentView(R.layout.activity_all_products)
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
