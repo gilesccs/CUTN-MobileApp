@@ -20,13 +20,13 @@ class CategoryAdapter (private val productList: List<Category>, private val list
         holder.categoryName.text = currentProduct.category
         holder.imageViewCategory.setImageResource(currentProduct.imageResource)
         if (position == 0){
-            holder.cardView.setCardBackgroundColor(Color.rgb(240,143,143))
+            holder.cardView.setCardBackgroundColor(Color.rgb(235,159,159))
         } else if (position == 1){
-            holder.cardView.setCardBackgroundColor(Color.rgb(153,255,102))
+            holder.cardView.setCardBackgroundColor(Color.rgb(159,235,174))
         } else if (position == 2){
-            holder.cardView.setCardBackgroundColor(Color.rgb(245,245,245))
+            holder.cardView.setCardBackgroundColor(Color.rgb(159,177,235))
         } else {
-            holder.cardView.setCardBackgroundColor(Color.rgb(255,255,102))
+            holder.cardView.setCardBackgroundColor(Color.rgb(235,215,159))
         }
     }
 
