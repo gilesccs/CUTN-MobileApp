@@ -37,7 +37,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
     private var totalSteps = 0f
     private var prevTotal = 0f
     private var currentVoucher = "ASZ213SA"
-    private var voucherPool : List<String> = listOf("SZVA331A", "ZS1SA3A", "ASD31ASP","DEF113A3")
+    private var voucherPool : List<String> = listOf("SZEA331A", "ZSESA3AC", "ASE31ASP","DEE113A3")
     private val CHANNEL_ID = "channelID"
     private val CHANNEL_NAME = "channelName"
     private lateinit var NOT_MANAGER: NotificationManagerCompat
@@ -95,7 +95,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
 
     fun replaceVoucher(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
-        val savedCode = sharedPreferences.getString("discountCode","DEFAB32")
+        val savedCode = sharedPreferences.getString("discountCode","DLEABZ21")
 
         if (savedCode != null) {
             Log.i("test",savedCode)
@@ -227,6 +227,7 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             showMsg()
             getRandVoucher()
             replaceVoucher()
+            resetSharedPref()
             prevTotal = totalSteps
             curr.text = 0.toString()
             saveData()
@@ -247,6 +248,13 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putFloat("key1",prevTotal)
+        editor.apply()
+    }
+
+    private fun resetSharedPref(){
+        val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putFloat("key1", 0f)
         editor.apply()
     }
 
