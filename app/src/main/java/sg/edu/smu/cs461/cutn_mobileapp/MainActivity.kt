@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
                 else -> R.drawable.r4
             }
 
-            val item = PopularItem(drawable,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity,list.get(j).country)
+            val item = PopularItem(drawable,list.get(j).productid,list.get(j).productname,list.get(j).description,list.get(j).price,list.get(j).quantity,list.get(j).country)
             list2 += item
         }
         return list2
