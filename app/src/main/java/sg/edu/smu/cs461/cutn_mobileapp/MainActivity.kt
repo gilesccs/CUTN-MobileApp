@@ -138,6 +138,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         return list
     }
 
+    fun goToAllProducts(view: View) {
+        val intent = Intent(this, AllProducts::class.java)
+        startActivity(intent)
+        Log.i("TABLE CALLED","TEST")
+    }
+    
 
     private fun individualPage() {
         val rewardsBtn = findViewById<ImageButton>(R.id.photo)

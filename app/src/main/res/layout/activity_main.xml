@@ -19,7 +19,6 @@
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/cart"
         android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/rewards"
         app:layout_constraintEnd_toStartOf="@+id/rewards"
         app:layout_constraintTop_toTopOf="@+id/rewards"/>
-
     <ImageButton
         android:id="@+id/rewards"
         android:layout_width="wrap_content"
@@ -41,7 +39,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/cutn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cutn"/>
-
     <EditText
         android:id="@+id/searchForProduct"
         android:layout_width="match_parent"
@@ -51,7 +48,6 @@
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="4dp" />
-
     <ImageButton
         android:id="@+id/photo"
         android:layout_width="wrap_content"
@@ -62,7 +58,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/microphone"
         app:layout_constraintEnd_toStartOf="@+id/microphone"
         app:layout_constraintTop_toTopOf="@+id/microphone"/>
-
     <ImageButton
         android:id="@+id/microphone"
         android:layout_width="wrap_content"
@@ -83,11 +78,20 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All Product"
+        app:layout_constraintBottom_toTopOf="@+id/popularItems"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category"
+        android:onClick="goToAllProducts"/>
+        
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/popularItemsFragment"
         android:name="sg.edu.smu.cs461.cutn_mobileapp.popularitemsFragment"
         tools:layout="@layout/fragment_popularitems"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
