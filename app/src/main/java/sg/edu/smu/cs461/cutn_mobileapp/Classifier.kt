@@ -47,8 +47,8 @@ class Classifier : AppCompatActivity() {
         for (i in 0 until size){
             var j = i
             val drawable = when (i%4){
-                0 -> R.drawable.fruits2
-                1 -> R.drawable.vegetable
+                0 -> R.drawable.fr
+                1 -> R.drawable.vg
                 2 -> R.drawable.milk
                 else -> R.drawable.snack
             }
