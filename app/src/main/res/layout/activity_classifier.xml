@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Classifier"
+    android:background="@drawable/softbg">
+
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_baseline_arrow_back_ios_24"
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Button
+        android:id="@+id/goCart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cart"
+        android:layout_margin="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        />
+
+
+    <io.armcha.elasticview.ElasticView
+        android:id="@+id/elasticViewImage"
+        app:flexibility="7"
+        android:layout_centerHorizontal="true"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/goCart"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp">
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/r4"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </io.armcha.elasticview.ElasticView>
+
+    <TextView
+        android:id="@+id/classifierLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_below="@+id/elasticViewImage"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baloo"
+        android:text="Mexican Air-flown Avocado"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/popularItemsFragment"
+        android:name="sg.edu.smu.cs461.cutn_mobileapp.classifierFragment"
+        tools:layout="@layout/classifier_fragment"/>
+
+
+
+
+
+</RelativeLayout>

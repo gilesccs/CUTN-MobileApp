@@ -99,7 +99,7 @@ class MyDBHelper(context:Context) : SQLiteOpenHelper(context,"ProductsDB",null,1
         var list : MutableList<Product> = ArrayList()
         val db = this.readableDatabase
         val keyValue = "%$keyword%"
-        val query = "Select * from Products where productname LIKE $keyValue"
+        val query = "Select * from Products where productname LIKE '$keyValue'"
         val result = db.rawQuery(query,null)
         if(result.moveToFirst()){
             do{

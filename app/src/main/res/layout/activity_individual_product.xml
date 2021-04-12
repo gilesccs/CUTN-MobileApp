@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/productNameLabel"
+        android:id="@+id/classifierLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -46,7 +46,7 @@
         android:id="@+id/locationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/productNameLabel"
+        android:layout_below="@+id/classifierLabel"
         android:layout_centerInParent="true"
         android:layout_marginTop="-8dp"
         android:fontFamily="@font/baloo"
@@ -61,7 +61,7 @@
         android:layout_width="350dp"
         android:layout_height="280dp"
         android:layout_marginTop="25dp"
-        android:layout_below="@+id/productNameLabel"
+        android:layout_below="@+id/classifierLabel"
         android:layout_centerInParent="true"
         app:cardElevation="5dp"
         app:cardCornerRadius="10dp">
@@ -69,7 +69,7 @@
         android:id="@+id/productImageLabel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/productNameLabel"
+        android:layout_below="@+id/classifierLabel"
         android:layout_centerInParent="true"
         android:src="@drawable/r4"
         android:gravity="center"
