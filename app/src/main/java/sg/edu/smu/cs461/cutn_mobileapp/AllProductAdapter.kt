@@ -50,6 +50,13 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
 //            this.product_price.text = "$${product.price.toString()}"
             this.product_price.text = product.price.toString()
             this.product_image.setImageResource(R.drawable.r1)
+            val variableValue = "r${product.productid}"
+
+            val context = itemView.context
+            val resourceId = context.resources.getIdentifier(variableValue, "drawable",context.packageName)
+            this.product_image.setImageResource(resourceId)
+//            itemView.product_image.setImageResource(Resources.getIdentifier(variableValue))
+//            itemView.product_image.setImageResource(ContextCompat.getDrawable(context, variableValue))
 //            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
 
             Observable.create(ObservableOnSubscribe<MutableList<CartItem>> {
