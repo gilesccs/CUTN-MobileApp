@@ -20,11 +20,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.res.ResourcesCompat
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import nl.dionsegijn.konfetti.KonfettiView
 import nl.dionsegijn.konfetti.emitters.StreamEmitter
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
+import www.sanju.motiontoast.MotionToast
 
 
 class Rewards : AppCompatActivity(), SensorEventListener {
@@ -118,7 +120,15 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         running = true
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if(stepSensor == null) {
-            Toast.makeText(this,"Pedometer might not work in your device!", Toast.LENGTH_LONG).show()
+
+//            Toast.makeText(this,"Pedometer might not work in your device!", Toast.LENGTH_LONG).show()
+            MotionToast.createToast(this,
+                "",
+                "Pedometer might not work in your device!",
+                MotionToast.TOAST_INFO,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.helvetica_regular))
         }else{
             sensorManager?.registerListener(this,stepSensor,SensorManager.SENSOR_DELAY_UI)
         }
@@ -153,7 +163,14 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData = ClipData.newPlainText("text", textToCopy)
             clipboardManager.setPrimaryClip(clipData)
-            Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_LONG).show()
+//            Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_LONG).show()
+            MotionToast.createToast(this,
+                "Copied!",
+                "Text copied to clipboard",
+                MotionToast.TOAST_INFO,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.helvetica_regular))
         }
 
 
@@ -194,7 +211,14 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         val btn = findViewById<Button>(R.id.resetBtn)
         val curr = findViewById<TextView>(R.id.currentStepsView)
         btn.setOnClickListener{
-            Toast.makeText(this,"Hold this to reset your rewards! Make sure to copy the discount code",Toast.LENGTH_LONG).show()
+//            Toast.makeText(this,"Hold this to reset your rewards! Make sure to copy the discount code",Toast.LENGTH_LONG).show()
+            MotionToast.createToast(this,
+                "",
+                "Hold this to reset your rewards! Make sure to copy the discount code!",
+                MotionToast.TOAST_INFO,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.helvetica_regular))
         }
 
         btn.setOnLongClickListener{

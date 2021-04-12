@@ -1,6 +1,7 @@
 package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +11,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import org.w3c.dom.Text
+import www.sanju.motiontoast.MotionToast
 import java.text.DecimalFormat
 
 class AllProductAdapter(var context: Context, var products: List<Product> = arrayListOf()) :
@@ -70,6 +73,13 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
 
                     ShoppingCart.addItem(item)
                     //notify users
+                    MotionToast.darkToast(itemView.context as Activity,
+                        "Added to cart",
+                        "${product.productname} added!",
+                        MotionToast.TOAST_SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(context,R.font.helvetica_regular))
 //                Snackbar.make(
 //                    (itemView.context as MainActivity).coordinator,
 //                    "${product.name} added to your cart",
