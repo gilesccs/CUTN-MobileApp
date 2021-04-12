@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.DecimalFormat
 
 class PopularItemAdapter (private val productList: List<PopularItem>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PopularItemAdapter.PopularItemViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularItemViewHolder {
@@ -18,9 +19,14 @@ class PopularItemAdapter (private val productList: List<PopularItem>, private va
     override fun onBindViewHolder(holder: PopularItemViewHolder, position: Int) {
         val currentProduct = productList[position]
         holder.imageViewPopularItem.setImageResource(currentProduct.imageResource)
-        holder.productName.text = "Item: " + currentProduct.productname
-        holder.description.text = "Description: " + currentProduct.description
-        holder.price.text = "Price: $" + currentProduct.price.toString()
+        holder.productName.text = currentProduct.productname.capitalize()
+        holder.description.text = currentProduct.description.capitalize()
+
+        // Format price
+        val dec = DecimalFormat("##0.00")
+        val totalPriceString = dec.format(currentProduct.price)
+
+        holder.price.text = "Price: $" + totalPriceString
         holder.quantity.text = "Quantity: " + currentProduct.quantity
         holder.cardView.setCardBackgroundColor(Color.rgb(243,241,235))
     }
