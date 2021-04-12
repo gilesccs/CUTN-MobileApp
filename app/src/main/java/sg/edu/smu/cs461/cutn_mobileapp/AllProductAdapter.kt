@@ -61,6 +61,8 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
             val context = itemView.context
             val resourceId = context.resources.getIdentifier(variableValue, "drawable",context.packageName)
             this.product_image.setImageResource(resourceId)
+
+            
 //            itemView.product_image.setImageResource(Resources.getIdentifier(variableValue))
 //            itemView.product_image.setImageResource(ContextCompat.getDrawable(context, variableValue))
 //            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
@@ -92,11 +94,14 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
 
                     ShoppingCart.removeItem(item, itemView.context)
 
-//                Snackbar.make(
-//                    (itemView.context as MainActivity).coordinator,
-//                    "${product.name} removed from your cart",
-//                    Snackbar.LENGTH_LONG
-//                ).show()
+                    //notify users
+                    MotionToast.darkToast(itemView.context as Activity,
+                        "Removed from cart",
+                        "${product.productname} removed!",
+                        MotionToast.TOAST_SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.SHORT_DURATION,
+                        ResourcesCompat.getFont(context,R.font.helvetica_regular))
                     Log.i("item", "Removed from cart: ${product.productname}")
                     it.onNext(ShoppingCart.getCart())
                 }
