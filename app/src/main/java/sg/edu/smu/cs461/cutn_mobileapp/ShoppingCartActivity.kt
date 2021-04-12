@@ -23,6 +23,7 @@ import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCart
 import sg.edu.smu.cs461.cutn_mobileapp.ShoppingCartAdapter
 import www.sanju.motiontoast.MotionToast
 import java.text.DecimalFormat
+import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
 class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
@@ -46,7 +47,7 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         )
         supportActionBar?.setHomeAsUpIndicator(upArrow)
 
-        adapter = ShoppingCartAdapter(this, ShoppingCart.getCart(),this)
+        adapter = ShoppingCartAdapter(this, ShoppingCart.getCart(), this)
         adapter.notifyDataSetChanged()
 
         shopping_cart_recyclerView.adapter = adapter
@@ -69,11 +70,16 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
                 if (s.length == 8) {
                     if (s.substring(2, 3).toLowerCase() != "e") {
                         MotionToast.darkToast(
-                            this@ShoppingCartActivity, "Voucher invalid!", "You have entered an invalid voucher!",
+                            this@ShoppingCartActivity,
+                            "Voucher invalid!",
+                            "You have entered an invalid voucher!",
                             MotionToast.TOAST_ERROR,
                             MotionToast.GRAVITY_BOTTOM,
                             MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+                            ResourcesCompat.getFont(
+                                this@ShoppingCartActivity,
+                                R.font.helvetica_regular
+                            )
                         )
                         return
                     } else if (!isVoucherApplied) {
@@ -84,7 +90,10 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
                             MotionToast.TOAST_SUCCESS,
                             MotionToast.GRAVITY_BOTTOM,
                             MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+                            ResourcesCompat.getFont(
+                                this@ShoppingCartActivity,
+                                R.font.helvetica_regular
+                            )
                         )
                         isVoucherApplied = true
                         var totalPrice = ShoppingCart.getCart()
@@ -129,19 +138,60 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
     }
 
     fun checkout(view: View) {
+        val voucher = voucherCode.text
+        if (voucher.length != 8 || voucher.substring(2, 3).toLowerCase() != "e") {
+            MotionToast.darkToast(
+                this@ShoppingCartActivity,
+                "Voucher invalid!",
+                "You have entered an invalid voucher!",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+            )
+            return
+        } else if (!isVoucherApplied) {
+            MotionToast.darkToast(
+                this@ShoppingCartActivity,
+                "Voucher code applied!",
+                "Your voucher has been applied for a discount",
+                MotionToast.TOAST_SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+            )
+            isVoucherApplied = true
+            var totalPrice = ShoppingCart.getCart()
+                .fold(0.toDouble()) { acc, cartItem ->
+                    acc + cartItem.quantity.times(
+                        cartItem.product.price!!.toDouble()
+                    )
+                } * 0.90
+
+            val dec = DecimalFormat("##0.00")
+            val totalPriceString = dec.format(totalPrice)
+
+            total_price.text = "$${totalPriceString}"
+
+        }
         if (ShoppingCart.getCart().size != 0) {
-        MotionToast.darkToast(
-            this@ShoppingCartActivity, "Items checked out!", "You have successfully checked out your cart.",
-            MotionToast.TOAST_SUCCESS,
-            MotionToast.GRAVITY_BOTTOM,
-            MotionToast.LONG_DURATION,
-            ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
-        )
-        Paper.book().destroy();
-        startActivity(Intent(this, MainActivity::class.java))
+            MotionToast.darkToast(
+                this@ShoppingCartActivity,
+                "Items checked out!",
+                "You have successfully checked out your cart.",
+                MotionToast.TOAST_SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+            )
+            TimeUnit.SECONDS.sleep(1000L)
+            Paper.book().destroy();
+            startActivity(Intent(this, MainActivity::class.java))
         } else {
             MotionToast.darkToast(
-                this@ShoppingCartActivity, "No items in cart!", "Please add more items before checking out.",
+                this@ShoppingCartActivity,
+                "No items in cart!",
+                "Please add more items before checking out.",
                 MotionToast.TOAST_ERROR,
                 MotionToast.GRAVITY_BOTTOM,
                 MotionToast.LONG_DURATION,
@@ -154,7 +204,7 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         Toast.makeText(this, "Removed!", Toast.LENGTH_SHORT)
         ShoppingCart.removeItem(item, this)
         adapter.notifyDataSetChanged()
-        Log.i("hello","REMOVED $item")
+        Log.i("hello", "REMOVED $item")
         recreate()
     }
 }
