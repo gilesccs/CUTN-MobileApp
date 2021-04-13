@@ -2,16 +2,16 @@ package sg.edu.smu.cs461.cutn_mobileapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,14 +40,57 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
             populateRecyclerCard(product)
         }
     }
+    private fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+        // Raw height and width of image
+        val (height: Int, width: Int) = options.run { outHeight to outWidth }
+        var inSampleSize = 1
+
+        if (height > reqHeight || width > reqWidth) {
+
+            val halfHeight: Int = height / 2
+            val halfWidth: Int = width / 2
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
+                inSampleSize *= 2
+            }
+        }
+
+        return inSampleSize
+    }
+
+    private fun decodeSampledBitmapFromResource(
+        path: String,
+        reqWidth: Int,
+        reqHeight: Int
+    ): Bitmap {
+        // First decode with inJustDecodeBounds=true to check dimensions
+        return BitmapFactory.Options().run {
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(path)
+
+            // Calculate inSampleSize
+            inSampleSize = calculateInSampleSize(this, reqWidth, reqHeight)
+
+            // Decode bitmap with inSampleSize set
+            inJustDecodeBounds = false
+            BitmapFactory.decodeFile(path)
+        }
+    }
 
     private fun analyzeWithClassifier(ctx: Context) {
         val imgFile = File(getDir("groceryPhoto", MODE_APPEND).toString() + "/groceryItem.jpg")
         var bitmap: Bitmap? = null
         var userImage = findViewById<ImageView>(R.id.userImage)
+        val width = userImage.drawable.intrinsicWidth
+        val height = userImage.drawable.intrinsicHeight
         if (imgFile.exists()) {
+            userImage.setImageBitmap(
+                decodeSampledBitmapFromResource(imgFile.absolutePath, width, height)
+            )
             bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-            userImage.setImageBitmap(bitmap)
+//            userImage.setImageBitmap(bitmap)
         }
 
         val groceryModel = GroceryModel.newInstance(ctx)
