@@ -53,9 +53,9 @@ class IndividualProduct : AppCompatActivity() {
         var newList = ArrayList<Product>();
         var firstNum = 0
         while(currIndex < 2){
-            var rnds = (1..29).random()
+            var rnds = (0..28).random()
             while(rnds == firstNum) {
-                rnds = (1..29).random()
+                rnds = (0..28).random()
             }
             firstNum = rnds
             var currProduct = list[rnds]
