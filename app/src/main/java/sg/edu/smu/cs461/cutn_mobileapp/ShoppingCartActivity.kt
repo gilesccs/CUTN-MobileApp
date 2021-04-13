@@ -139,18 +139,38 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
 
     fun checkout(view: View) {
         val voucher = voucherCode.text
-        if (voucher.length != 8 || voucher.substring(2, 3).toLowerCase() != "e") {
+
+        // Voucher is entered but is invalid
+        if (voucher.isNotEmpty() && (voucher.length != 8 || voucher.substring(2, 3)
+                .toLowerCase() != "e")
+        ) {
             MotionToast.darkToast(
                 this@ShoppingCartActivity,
                 "Voucher invalid!",
-                "You have entered an invalid voucher!",
+                "Please remove or edit your voucher code.",
                 MotionToast.TOAST_ERROR,
                 MotionToast.GRAVITY_BOTTOM,
                 MotionToast.LONG_DURATION,
                 ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
             )
             return
-        } else if (!isVoucherApplied) {
+        }
+
+        // if shopping cart is empty
+        if (ShoppingCart.getCart().size == 0) {
+            MotionToast.darkToast(
+                this@ShoppingCartActivity,
+                "No items in cart!",
+                "Please add more items before checking out.",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+            )
+        }
+
+        // to apply voucher if one is specified
+        if (!isVoucherApplied && voucher.isNotEmpty()) {
             MotionToast.darkToast(
                 this@ShoppingCartActivity,
                 "Voucher code applied!",
@@ -174,30 +194,21 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
             total_price.text = "$${totalPriceString}"
 
         }
-        if (ShoppingCart.getCart().size != 0) {
-            MotionToast.darkToast(
-                this@ShoppingCartActivity,
-                "Items checked out!",
-                "You have successfully checked out your cart.",
-                MotionToast.TOAST_SUCCESS,
-                MotionToast.GRAVITY_BOTTOM,
-                MotionToast.LONG_DURATION,
-                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
-            )
-            TimeUnit.SECONDS.sleep(1000L)
-            Paper.book().destroy();
-            startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            MotionToast.darkToast(
-                this@ShoppingCartActivity,
-                "No items in cart!",
-                "Please add more items before checking out.",
-                MotionToast.TOAST_ERROR,
-                MotionToast.GRAVITY_BOTTOM,
-                MotionToast.LONG_DURATION,
-                ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
-            )
-        }
+
+        MotionToast.darkToast(
+            this@ShoppingCartActivity,
+            "Items checked out!",
+            "You have successfully checked out your cart.",
+            MotionToast.TOAST_SUCCESS,
+            MotionToast.GRAVITY_BOTTOM,
+            MotionToast.LONG_DURATION,
+            ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
+        )
+        TimeUnit.SECONDS.sleep(1L)
+        Paper.book().destroy();
+        voucherCode.text.clear()
+        startActivity(Intent(this, MainActivity::class.java))
+
     }
 
     override fun onItemClick(item: CartItem, position: Int) {
