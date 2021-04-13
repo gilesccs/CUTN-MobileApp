@@ -30,7 +30,6 @@ import www.sanju.motiontoast.MotionToast
 
 
 class Rewards : AppCompatActivity(), SensorEventListener {
-
     private var sensorManager: SensorManager? = null
     private var charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
     private var running = false
@@ -71,7 +70,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 .build()
 
         NOT_MANAGER = NotificationManagerCompat.from(this)
-
         goBackHomePage()
         loadData()
         resetRewards()
@@ -87,7 +85,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 lightColor = Color.BLUE
                 enableLights(true)
             }
-
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
         }
@@ -96,23 +93,15 @@ class Rewards : AppCompatActivity(), SensorEventListener {
     fun replaceVoucher(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
         val savedCode = sharedPreferences.getString("discountCode","DLEABZ21")
-
-        if (savedCode != null) {
-            Log.i("test",savedCode)
-        }
         if (savedCode != null) {
             currentVoucher = savedCode
         }
-
         val curr = findViewById<TextView>(R.id.voucherCode)
         curr.text = currentVoucher
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if(requestCode == 1313 && (grantResults[0] == PackageManager.PERMISSION_DENIED)){
-//            Toast.makeText(this,"Please accept the permission to continue!", Toast.LENGTH_SHORT).show()
-//        }
     }
 
     override fun onResume() {
@@ -120,8 +109,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         running = true
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if(stepSensor == null) {
-
-//            Toast.makeText(this,"Pedometer might not work in your device!", Toast.LENGTH_LONG).show()
             MotionToast.createColorToast(this,
                 "",
                 "Pedometer might not work in your device!",
@@ -134,7 +121,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
         }
     }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
@@ -163,7 +149,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
             val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData = ClipData.newPlainText("text", textToCopy)
             clipboardManager.setPrimaryClip(clipData)
-//            Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_LONG).show()
             MotionToast.createColorToast(this,
                 "Copied!",
                 "Text copied to clipboard",
@@ -172,8 +157,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                 MotionToast.LONG_DURATION,
                 ResourcesCompat.getFont(this,R.font.helvetica_regular))
         }
-
-
     }
 
 
@@ -194,24 +177,12 @@ class Rewards : AppCompatActivity(), SensorEventListener {
                     .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
                     .streamFor(particlesPerSecond = 200, emittingTime = 5000L)
         }
-//        val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
-//        viewKonfetti.build()
-//            .addColors(Color.BLUE, Color.MAGENTA)
-//            .setDirection(0.0, 359.0)
-//            .setSpeed(1f, 5f)
-//            .setFadeOutEnabled(true)
-//            .setTimeToLive(1000L)
-//            .addShapes(Shape.Square, Shape.Circle)
-//            .addSizes(Size(12, 5F))
-//            .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
-//            .streamFor(particlesPerSecond = 50, emittingTime = 5000L)
     }
 
     fun resetRewards(){
         val btn = findViewById<Button>(R.id.resetBtn)
         val curr = findViewById<TextView>(R.id.currentStepsView)
         btn.setOnClickListener{
-//            Toast.makeText(this,"Hold this to reset your rewards! Make sure to copy the discount code",Toast.LENGTH_LONG).show()
             MotionToast.createColorToast(this,
                 "",
                 "Hold this to reset your rewards! Make sure to copy the discount code!",
@@ -261,7 +232,6 @@ class Rewards : AppCompatActivity(), SensorEventListener {
     private fun loadData(){
         val sharedPreferences = getSharedPreferences("myPrefs",Context.MODE_PRIVATE)
         val savedNumber = sharedPreferences.getFloat("key1",0f)
-        Log.d("MainActivity","$savedNumber")
         prevTotal = savedNumber
     }
 

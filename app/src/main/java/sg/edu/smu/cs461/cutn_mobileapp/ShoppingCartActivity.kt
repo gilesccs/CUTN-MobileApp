@@ -27,16 +27,12 @@ import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
 class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
-
     lateinit var adapter: ShoppingCartAdapter
     var isVoucherApplied = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
-
-//        setSupportActionBar(toolbar as Toolbar?)
-
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,7 +47,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         adapter.notifyDataSetChanged()
 
         shopping_cart_recyclerView.adapter = adapter
-
         shopping_cart_recyclerView.layoutManager = LinearLayoutManager(this)
 
         var totalPrice = ShoppingCart.getCart()
@@ -60,7 +55,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         val dec = DecimalFormat("##0.00")
         val totalPriceString = dec.format(totalPrice)
 
-//        totalPrice = String.format("%.2f", totalPrice).toDouble()
         total_price.text = "$${totalPriceString}"
 
         // Voucher check
@@ -107,7 +101,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
                         val totalPriceString = dec.format(totalPrice)
 
                         total_price.text = "$${totalPriceString}"
-
                     }
                 }
             }
@@ -127,7 +120,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item?.itemId) {
             android.R.id.home -> {
                 onBackPressed()
@@ -139,7 +131,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
 
     fun checkout(view: View) {
         val voucher = voucherCode.text
-
         // Voucher is entered but is invalid
         if (voucher.isNotEmpty() && (voucher.length != 8 || voucher.substring(2, 3)
                 .toLowerCase() != "e")
@@ -155,7 +146,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
             )
             return
         }
-
         // if shopping cart is empty
         if (ShoppingCart.getCart().size == 0) {
             MotionToast.darkToast(
@@ -168,7 +158,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
                 ResourcesCompat.getFont(this@ShoppingCartActivity, R.font.helvetica_regular)
             )
         }
-
         // to apply voucher if one is specified
         if (!isVoucherApplied && voucher.isNotEmpty()) {
             MotionToast.darkToast(
@@ -190,7 +179,6 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
 
             val dec = DecimalFormat("##0.00")
             val totalPriceString = dec.format(totalPrice)
-
             total_price.text = "$${totalPriceString}"
 
         }
@@ -208,14 +196,12 @@ class ShoppingCartActivity : AppCompatActivity(), OnCartItemClickListener {
         Paper.book().destroy();
         voucherCode.text.clear()
         startActivity(Intent(this, MainActivity::class.java))
-
     }
 
     override fun onItemClick(item: CartItem, position: Int) {
-        Toast.makeText(this, "Removed!", Toast.LENGTH_SHORT)
+//        Toast.makeText(this, "Removed!", Toast.LENGTH_SHORT)
         ShoppingCart.removeItem(item, this)
         adapter.notifyDataSetChanged()
-        Log.i("hello", "REMOVED $item")
         recreate()
     }
 }

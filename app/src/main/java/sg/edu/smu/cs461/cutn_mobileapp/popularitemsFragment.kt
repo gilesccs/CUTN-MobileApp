@@ -19,7 +19,6 @@ class popularitemsFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // code to be written here
         viewRewards(this)
     }
 
@@ -32,8 +31,5 @@ class popularitemsFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-
     }
-
-
 }

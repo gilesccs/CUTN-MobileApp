@@ -51,9 +51,7 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
         @SuppressLint("CheckResult")
         fun bindProduct(product: Product) {
 
-//            itemView.product_name.text = product.name
             this.product_name.text = product.productname
-//            this.product_price.text = "$${product.price.toString()}"
             val dec = DecimalFormat("##0.00")
             val totalPriceString = dec.format(product.price)
             this.product_price.text = "$${totalPriceString}"
@@ -74,16 +72,10 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
                 it.putExtra("Country", product.country)
                 context.startActivity(it)
             }
-//            itemView.product_image.setImageResource(Resources.getIdentifier(variableValue))
-//            itemView.product_image.setImageResource(ContextCompat.getDrawable(context, variableValue))
-//            Picasso.get().load(product.photos[0].filename).fit().into(itemView.product_image)
 
             Observable.create(ObservableOnSubscribe<MutableList<CartItem>> {
-
                 this.addToCart.setOnClickListener { view ->
-
                     val item = CartItem(product)
-
                     ShoppingCart.addItem(item)
 
                     //notify users
@@ -94,17 +86,12 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.SHORT_DURATION,
                         ResourcesCompat.getFont(context,R.font.helvetica_regular))
-                    Log.i("item", "Added to cart: ${product.productname}")
                     it.onNext(ShoppingCart.getCart())
-
                 }
 
                 this.removeItem.setOnClickListener { view ->
-
                     val item = CartItem(product)
-
                     ShoppingCart.removeItem(item, itemView.context)
-
                     //notify users
                     MotionToast.darkToast(itemView.context as Activity,
                         "Removed from cart",
@@ -113,19 +100,14 @@ class AllProductAdapter(var context: Context, var products: List<Product> = arra
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.SHORT_DURATION,
                         ResourcesCompat.getFont(context,R.font.helvetica_regular))
-                    Log.i("item", "Removed from cart: ${product.productname}")
                     it.onNext(ShoppingCart.getCart())
                 }
             }).subscribe { cart ->
                 var quantity = 0
-
                 cart.forEach { cartItem ->
                     quantity += cartItem.quantity
                 }
-
                 (itemView.context as AllProducts).findViewById<TextView>(R.id.cart_size).text = quantity.toString()
-
-//                Toast.makeText(this.context, "Cart size $quantity", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -28,12 +28,9 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classifier)
         supportActionBar?.hide()
-        Log.i("img", "classifier just started!")
         goBackHomePage()
         val product = intent.getStringExtra("product")
-        Log.i("xo", "product: " + product )
         if (product == null) {
-            Log.i("xo", "1st")
             analyzeWithClassifier(this)
         } else {
             setPlaceholderImage()
@@ -46,17 +43,14 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         var inSampleSize = 1
 
         if (height > reqHeight || width > reqWidth) {
-
             val halfHeight: Int = height / 2
             val halfWidth: Int = width / 2
-
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
             // height and width larger than the requested height and width.
             while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
                 inSampleSize *= 2
             }
         }
-
         return inSampleSize
     }
 
@@ -90,7 +84,6 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
                 decodeSampledBitmapFromResource(imgFile.absolutePath, width, height)
             )
             bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-//            userImage.setImageBitmap(bitmap)
         }
 
         val groceryModel = GroceryModel.newInstance(ctx)
@@ -105,25 +98,17 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
             .apply { sortByDescending { it.score } }
             .take(1)
 
-        for (output in probability) {
-            Log.i("img", "label: "+output.label + " score: "+ output.score)
-        }
-
         // Releases model resources if no longer used.
         groceryModel.close()
 
         setLabel(probability[0].label)
-        Log.i("label", "what am i: "+probability[0].label.toString())
         this.labelTest = probability[0].label
-        Log.i("testing",  this.labelTest!!)
         populateRecyclerCard(probability[0].label)
     }
 
     private fun setPlaceholderImage() {
-        Log.i("xo", "setplaceholderimg")
         var userImage = findViewById<ImageView>(R.id.userImage)
         userImage.setImageDrawable(getDrawable(R.drawable.no_image_foreground))
-
     }
 
     private fun populateRecyclerCard(label: String) {
@@ -146,7 +131,6 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         val classifierList = generateDummyListForClassifier(numRecyclerCards, this.labelTest!!)
         val adapter = ClassifierAdapter(classifierList, this)
         val clickedItem: ClassifierModel = classifierList[position]
-
         val it = Intent(this, IndividualProduct::class.java)
         it.putExtra("ProductId", clickedItem.productid)
         it.putExtra("ProductName", clickedItem.productname)
@@ -155,7 +139,6 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         it.putExtra("Quantity", clickedItem.quantity)
         it.putExtra("Country", clickedItem.country)
         startActivity(it)
-
         adapter.notifyItemChanged(position)
     }
 
@@ -174,13 +157,12 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         }
         val list2 = ArrayList<Product>()
         val list3 = ArrayList<ClassifierModel>()
-
         var idx = 0
+
         while (list.size < numRecyclerCards) {
             list.add(list[idx])
             idx++
         }
-        Log.i("xo", list.toString())
 
         for (i in 0 until size){
             val item = Product(list.get(i).category,"${list.get(i).productname}",list.get(i).quantity, list.get(i).description,list.get(i).price, list.get(i).country, list.get(i).productid)
@@ -190,17 +172,6 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         for (i in 0 until size){
             var j = i
             val drawable = this.resources.getIdentifier("r${list2[i].productid}", "drawable",this.packageName)
-//            val drawable = when (i%4){
-//                0 -> R.drawable.fr
-//                1 -> R.drawable.vg
-//                2 -> R.drawable.milk
-//                else -> R.drawable.snack
-//            }
-
-//            if (j > 3){
-//                j = 0
-//            }
-
             val item = ClassifierModel(drawable,list2.get(j).productid,list2.get(j).productname,list2.get(j).description,list2.get(j).price,list2.get(j).quantity,list2.get(j).country)
             list3 += item
         }
@@ -216,25 +187,4 @@ class Classifier : AppCompatActivity(), ClassifierAdapter.OnItemClickListener {
         val intent = Intent(this, ShoppingCartActivity::class.java)
         startActivity(intent)
     }
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        var label = data?.getStringExtra("label").toString()
-//        Log.i("img", "in classifier: "+label)
-//
-////        when (requestCode) {
-////            1234 -> {
-////                Toast.makeText(this, "Your rating for Shaun: $rating", Toast.LENGTH_SHORT).show()
-////            }
-////            1236 -> {
-////                Toast.makeText(this, "Your rating for Gladwin: $rating", Toast.LENGTH_SHORT).show()
-////            }
-////            1237 -> {
-////                Toast.makeText(this, "Your rating for Alwyn: $rating", Toast.LENGTH_SHORT).show()
-////            }
-////            1238 -> {
-////                Toast.makeText(this, "Your rating for Giles: $rating", Toast.LENGTH_SHORT).show()
-////            }
-////        }
-//
-//    }
 }

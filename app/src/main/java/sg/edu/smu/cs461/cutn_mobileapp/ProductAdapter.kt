@@ -22,9 +22,6 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
         holder.description.text = "Description: " + currentProduct.description
         holder.price.text = "Price: $" + currentProduct.price.toString()
         holder.quantity.text = "Quantity: " + currentProduct.quantity
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -32,11 +29,9 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
     }
 
     class ProductViewHolder(productView: View) : RecyclerView.ViewHolder(productView) {
-//        val imageView: ImageView = productView.findViewById(R.id.imageView)
         val productName: TextView = productView.findViewById(R.id.productName)
         val description: TextView = productView.findViewById(R.id.description)
         val price: TextView = productView.findViewById(R.id.price)
         val quantity: TextView = productView.findViewById(R.id.quantity)
-
     }
 }

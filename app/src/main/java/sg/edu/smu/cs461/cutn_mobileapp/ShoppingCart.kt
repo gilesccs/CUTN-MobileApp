@@ -7,7 +7,6 @@ class ShoppingCart {
     companion object {
         fun addItem(cartItem: CartItem) {
             val cart = getCart()
-
             val targetItem = cart.singleOrNull { it.product.productid == cartItem.product.productid }
             if (targetItem == null) {
                 cartItem.quantity++
@@ -20,7 +19,6 @@ class ShoppingCart {
 
         fun removeItem(cartItem: CartItem, context: Context) {
             val cart = getCart()
-
             val targetItem = cart.singleOrNull { it.product.productid == cartItem.product.productid }
             if (targetItem != null) {
                 if (targetItem.quantity > 1) {
@@ -29,7 +27,6 @@ class ShoppingCart {
                     cart.remove(targetItem)
                 }
             }
-
             saveCart(cart)
         }
 
@@ -46,7 +43,6 @@ class ShoppingCart {
             getCart().forEach {
                 cartSize += it.quantity;
             }
-
             return cartSize
         }
     }

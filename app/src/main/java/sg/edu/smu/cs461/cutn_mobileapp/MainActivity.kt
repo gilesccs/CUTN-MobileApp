@@ -35,7 +35,6 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener, CategoryAdapter.OnItemClickListener {
     private var REQ_CODE = 3213
-
     private lateinit var gotoRewards: ImageView
     private var SPEECH_CODE = 1999
 
@@ -52,7 +51,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         searchBarBtn.setOnClickListener{
             searchFromText()
         }
-//        individualPage()
 
         val productList = generateDummyListForPopularItem(5)
         val recyclerViewPopularItem = findViewById<RecyclerView>(R.id.recyclerViewPopularItem)
@@ -89,15 +87,9 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.i("test", requestCode.toString())
         if (requestCode == SPEECH_CODE) {
-            Log.i("test", "yup")
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-//            val searchBtn = findViewById<EditText>(R.id.searchForProduct)
-            Log.i("test", "result is " + result?.get(0).toString())
-//            searchBtn.setText(result?.get(0).toString())
             startClassifierWithText(result?.get(0).toString())
-//            Toast.makeText(this, "${result} clicked", Toast.LENGTH_SHORT).show()
         } else {
             var pic = data?.getParcelableExtra<Bitmap>("data")
             if (pic === null) {
@@ -133,9 +125,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         val it = Intent(this, AllProducts::class.java)
         it.putExtra("category", clickedItem.category)
         startActivity(it)
-
-//        Toast.makeText(this, "${clickedItem.category} clicked", Toast.LENGTH_SHORT).show()
-//        clickedItem.category = "Clicked"
         adapter.notifyItemChanged(position)
     }
 
@@ -188,16 +177,7 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
     fun goToAllProducts(view: View) {
         val intent = Intent(this, AllProducts::class.java)
         startActivity(intent)
-        Log.i("TABLE CALLED","TEST")
     }
-    
-//    private fun individualPage() {
-//        val rewardsBtn = findViewById<ImageButton>(R.id.photo)
-//        rewardsBtn?.setOnClickListener{
-//            val it = Intent(this, IndividualProduct::class.java)
-//            startActivityForResult(it, 4321)
-//        }
-//    }
 
     fun launchCameraForClassifier(view: View) {
         val pickImageFileIntent = Intent()
@@ -206,14 +186,12 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
         }
         pickImageFileIntent.type = "image/*"
         pickImageFileIntent.action = Intent.ACTION_GET_CONTENT
-//        val pickGalleryImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         val captureCameraImageIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val pickTitle = "Capture from camera or Select from gallery the Profile photo"
         val chooserIntent = Intent.createChooser(pickImageFileIntent, pickTitle)
         chooserIntent.putExtra(
             Intent.EXTRA_INITIAL_INTENTS, arrayOf(
-                captureCameraImageIntent,
-//                pickGalleryImageIntent
+                captureCameraImageIntent
             )
         )
         startActivityForResult(chooserIntent, REQ_CODE)
@@ -227,7 +205,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
             i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
             i.putExtra(RecognizerIntent.EXTRA_PROMPT,"Name a grocery!")
-            Log.i("test","reached")
             startActivityForResult(i,SPEECH_CODE)
         }
     }
@@ -289,7 +266,6 @@ class MainActivity : AppCompatActivity(), PopularItemAdapter.OnItemClickListener
 
     private fun startClassifierWithText(product:String) {
         val it = Intent(this, AllProducts::class.java)
-        Log.i("product",product)
         it.putExtra("product", product)
         startActivity(it)
     }

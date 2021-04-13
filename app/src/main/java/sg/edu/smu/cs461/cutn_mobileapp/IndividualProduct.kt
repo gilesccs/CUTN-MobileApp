@@ -39,7 +39,6 @@ class IndividualProduct : AppCompatActivity() {
         val dec = DecimalFormat("##0.00")
         val totalPriceString = dec.format(price)
 
-//        totalPrice = String.format("%.2f", totalPrice).toDouble()
         pricel.text = "$${totalPriceString}"
 
         var packl = findViewById<TextView>(R.id.productPackSize)
@@ -113,14 +112,8 @@ class IndividualProduct : AppCompatActivity() {
     }
 
     private fun addQtyListener(){
-//        val qtyBtn = findViewById<Button>(R.id.quantityBtn)
-//        val submit = findViewById<Button>(R.id.submitBtn)
-//        submit.setOnClickListener{
-//            Toast.makeText(this, qtyBtn.text, Toast.LENGTH_SHORT).show()
-//        }
         val abutton = findViewById<View>(R.id.quantityBtn) as ElegantNumberButton
         abutton.setOnClickListener(ElegantNumberButton.OnClickListener { qty = abutton.number })
-
     }
 
     private fun addToCart(category: String, productname: String, quantity: String, description: String, price: Float, country: String, productid: Int){
@@ -128,7 +121,6 @@ class IndividualProduct : AppCompatActivity() {
         submit.setOnClickListener{
             val value = qty.toInt()
             if(value == 0){
-                Log.i("test","reachedHERE!")
 //                Toast.makeText(this, "Please specify at least 1 quantity!", Toast.LENGTH_SHORT).show()
                 MotionToast.createColorToast(
                     this,
@@ -140,7 +132,6 @@ class IndividualProduct : AppCompatActivity() {
                     ResourcesCompat.getFont(this, R.font.helvetica_regular)
                 )
             }else{
-//                Log.i("test", value.toString())
                 var currentProduct = Product(category,productname,quantity,description,price,country,productid)
                 addItem(CartItem(currentProduct,(value-1)))
                 MotionToast.createColorToast(this,
